@@ -20,6 +20,7 @@ GDSD course project repository for group 2 of Global Software Development.
 
 ### Team Members:
 
-  - Syeda Tasneem Rumy, Email: syedatasneemrumy@gmail.com, Matrikel Nr. 1189706
+  - Syeda Tasneem Rumy, Email: syedatasneemrumy@gmail.com, Matrikel Nr.: 1189706
+  - Syed Sumair, Email: sumair.uit@gmail.com, Matrikel Nr.: 1310771
 
 
