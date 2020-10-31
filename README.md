@@ -1,11 +1,6 @@
-## gdsd2020g2
-
-This is a GDSD course project repository for group 2 of Master program Global Software Development (GSD) of HS Fulda. 
-
-
 ## Group 2 GDSD 2020
 
-Project Repository for Group 2 GDSD 2020
+GDSD course project repository for group 2 of Global Software Development.
 
 
 ### Technology Stack:
