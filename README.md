@@ -22,5 +22,6 @@ GDSD course project repository for group 2 of Global Software Development.
 
   - Syeda Tasneem Rumy, Email: syedatasneemrumy@gmail.com, Matrikel Nr.: 1189706
   - Syed Sumair, Email: sumair.uit@gmail.com, Matrikel Nr.: 1310771
+  - Ahmed Abdullah, Email: ahmed.abdullah@informatik.hs-fulda.de, Matrikel Nr.: 1250378
 
 
