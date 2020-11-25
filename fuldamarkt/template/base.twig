@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+</head>
+<body>
+
+<ul id="navigation">
+    {% for item in navigation %}
+        <li><a href="{{ item.href }}">{{ item.caption }}</a></li>
+    {% endfor %}
+</ul>
+
+<h1>{% block page_title %}{{ title }}{% endblock %}</h1>
+
+
+{{ body }}
+{% block body %}
+Index
+{% endblock %}
+
+</body>
+</html>

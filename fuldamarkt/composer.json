@@ -1,0 +1,26 @@
+{
+  "name": "articulatedlogic/fuldamarkt",
+  "description": "Shopping in Fulda",
+  "license": "MIT",
+  "require": {
+    "php": ">=7.0",
+    "symfony/http-foundation": "3.*",
+    "symfony/expression-language": "3.*",
+    "envms/fluentpdo": "1.1.*",
+    "twig/twig": "3.*",
+    "components/jquery": "~2.1",
+    "components/jqueryui": "^1.11",
+    "erusev/parsedown": "1.6.1"
+  },
+  "config": {
+    "component-dir": "vendor/assets"
+  },
+  "authors": [
+    {
+      "name": "Syeda Tasneem Rumy",
+      "email": "syedatasneemrumy@gmail.com",
+      "homepage": "http://articulatedlogic.com/",
+      "role": "Developer"
+    }
+  ]
+}
