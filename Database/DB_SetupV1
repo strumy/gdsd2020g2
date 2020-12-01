@@ -1,0 +1,151 @@
+//By: Ahmed Abdullah (1250378)
+//todo:
+input and test some sample data
+
+notes: using version 14.14 Distrib 5.7.32 (command: mysql --version)
+use this guide to create a user to login with mysql Workbench:
+https://www.configserverfirewall.com/ubuntu-linux/mysql-allow-remote-connections/
+Make sure the db has SSL support (needed for SHA2 password hashing)
+command to check SSL: SHOW VARIABLES LIKE 'have_ssl';
+
+Steps:
+1.Create a new user using the guide above.
+2.Create the schema (name it : Fulda_Markt1).
+3.Execute the table creation query.
+4.Execute the user setup and privilege query.
+5.Create the two stored procedures: 'create_account' and 'check_password'.
+6.Test by creating a new website user and check his passowrd.
+
+///Query to create tables after initial schema is created and selected(schema name is 
+referenced in the queries below as:(Fulda_Markt1)):
+CREATE TABLE IF NOT EXISTS USER_TABLE
+       (
+           user_id INT AUTO_INCREMENT PRIMARY KEY, 
+           username VARCHAR(30) NOT NULL UNIQUE,
+           type VARCHAR(20) NOT NULL,
+           email VARCHAR(30) NOT NULL UNIQUE,
+           status VARCHAR(20) NOT NULL
+        );
+        
+CREATE TABLE IF NOT EXISTS PASS_TABLE
+       (
+           user_id int,
+           pass_hash varchar(255),
+           primary key(user_id,pass_hash),
+           foreign key(user_id)
+		references USER_TABLE(user_id)
+                    ON DELETE CASCADE
+        );
+
+CREATE TABLE IF NOT EXISTS MARKET_TABLE
+(
+    post_id INT AUTO_INCREMENT PRIMARY KEY, 
+	title VARCHAR(255) NOT NULL,
+	author_id int NOT NULL,
+	timestamp DATE NOT NULL,
+    picture blob,
+    text_body text,
+    market_category VARCHAR(40) NOT NULL,
+    Price decimal(9,2) NOT NULL,
+    Status varchar(100) NOT NULL,
+    Sold_to int,
+    FOREIGN KEY(author_id)
+		REFERENCES USER_TABLE(user_id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS EVENTS_TABLE
+(
+    post_id INT AUTO_INCREMENT PRIMARY KEY, 
+	title VARCHAR(255) NOT NULL,
+	author_id int NOT NULL,
+	timestamp DATE NOT NULL,
+    picture blob,
+    text_body text,
+    FOREIGN KEY(author_id)
+		REFERENCES USER_TABLE(user_id)
+        ON DELETE CASCADE
+);
+
+create table userfavoriteitem
+(
+    user_id  int, 
+    post_id  int, 
+    PRIMARY KEY(user_id,post_id),
+    FOREIGN KEY(user_id)
+		REFERENCES USER_TABLE(user_id)
+        ON DELETE CASCADE,
+	FOREIGN KEY(post_id)
+		REFERENCES MARKET_TABLE(post_id)
+		ON DELETE CASCADE
+);
+
+/////user profiles:
+
+CREATE USER IF NOT EXISTS 'admin1'@'%' IDENTIFIED BY 'passwordhere';
+CREATE USER IF NOT EXISTS 'student'@'%' IDENTIFIED BY 'passwordhere';
+CREATE USER IF NOT EXISTS 'staff'@'%' IDENTIFIED BY 'passwordhere';
+CREATE USER IF NOT EXISTS 'guest'@'%' IDENTIFIED BY 'passwordhere';
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON Fulda_Markt1.USER_TABLE TO 'admin1'@'%';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Fulda_Markt1.EVENTS_TABLE TO 'admin1'@'%';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Fulda_Markt1.MARKET_TABLE TO 'admin1'@'%';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Fulda_Markt1.userfavoriteitem TO 'admin1'@'%';
+GRANT EXECUTE ON PROCEDURE Fulda_Markt1.create_account TO 'admin1'@'%';
+GRANT EXECUTE ON PROCEDURE Fulda_Markt1.check_password TO 'admin1'@'%';
+
+
+GRANT SELECT ON Fulda_Markt1.USER_TABLE TO 'student'@'%';
+GRANT SELECT ON Fulda_Markt1.EVENTS_TABLE TO 'student'@'%';
+GRANT SELECT, INSERT, DELETE ON Fulda_Markt1.MARKET_TABLE TO 'student'@'%';
+GRANT SELECT, INSERT, DELETE ON Fulda_Markt1.userfavoriteitem TO 'student'@'%';
+
+
+GRANT SELECT ON Fulda_Markt1.USER_TABLE TO 'staff'@'%';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Fulda_Markt1.EVENTS_TABLE TO 'staff'@'%';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Fulda_Markt1.MARKET_TABLE TO 'staff'@'%';
+GRANT SELECT, INSERT, DELETE ON Fulda_Markt1.userfavoriteitem TO 'staff'@'%';
+
+
+GRANT SELECT ON Fulda_Markt1.USER_TABLE TO 'guest'@'%';
+GRANT SELECT ON Fulda_Markt1.EVENTS_TABLE TO 'guest'@'%';
+GRANT SELECT ON Fulda_Markt1.MARKET_TABLE TO 'guest'@'%';
+GRANT SELECT ON Fulda_Markt1.userfavoriteitem TO 'guest'@'%';
+GRANT EXECUTE ON PROCEDURE Fulda_Markt1.create_account TO 'guest'@'%';
+GRANT EXECUTE ON PROCEDURE Fulda_Markt1.check_password TO 'guest'@'%';
+
+
+///stored procedure for checking passwords:
+CREATE PROCEDURE `check_password`(IN username1 VARCHAR(30), 
+IN password1 VARCHAR(255), 
+OUT result VARCHAR(10))
+BEGIN
+DECLARE returned_hash VARCHAR(255);
+
+SELECT PASS_TABLE.pass_hash INTO returned_hash FROM PASS_TABLE
+JOIN USER_TABLE ON PASS_TABLE.user_id = USER_TABLE.user_id
+WHERE USER_TABLE.username=username1;
+
+IF returned_hash=SHA2(password1, 224) THEN
+	SET result = 'success';
+ELSE
+	SET result = 'fail';
+END IF;
+
+SELECT @result;
+
+END
+
+
+///stored procedure for creating accounts
+CREATE PROCEDURE `create_account`(username1 VARCHAR(30), email1 VARCHAR(30), password1 VARCHAR(255))
+BEGIN
+INSERT INTO USER_TABLE(username, type, email, status) VALUES(username1, 'student', email1, 'active');
+INSERT INTO PASS_TABLE(user_id, pass_hash) VALUES(LAST_INSERT_ID(), SHA2(password1, 224));
+END
+
+
+///for testing users' passwords:
+Call create_account('johnnyb','someemaiil@wa7d.com','akofdwa7d')
+Call check_password('johnnyb','akofdwa7d',@result1);
+select @result1;
