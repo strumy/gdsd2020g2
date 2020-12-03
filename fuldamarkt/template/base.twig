@@ -13,10 +13,18 @@
 
 <h1>{% block page_title %}{{ title }}{% endblock %}</h1>
 
+{% if message != "" %}
+    <div id="reports">{{ message }}</div>
+{% endif %}
 
-{{ body }}
+{% if errors != "" %}
+    {% for error in errors %}
+        <div id="reports">{{ error }}</div>
+    {% endfor %}
+{% endif %}
+
 {% block body %}
-Index
+    {{ body }}
 {% endblock %}
 
 </body>

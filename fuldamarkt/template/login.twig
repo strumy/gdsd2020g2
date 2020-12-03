@@ -1,0 +1,23 @@
+{% extends "base.twig" %}
+
+{% block body %}
+    <p>{{ body }}</p>
+    <form method="post" action="login.php">
+        <fieldset>
+            <legend>Enter email and password to login.</legend>
+            <div>
+                <label for="email">Email</label>
+                <input id="email" type="text" placeholder="Email address" name="email">
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input id="password" type="password" placeholder="Your password" name="password">
+            </div>
+            <div>
+                <button type="submit" name="submit">Login</button>
+            </div>
+        </fieldset>
+    </form>
+
+{% endblock %}
+

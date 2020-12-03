@@ -1,0 +1,60 @@
+{% extends "base.twig" %}
+
+{% block body %}
+    <p>{{ body }}</p>
+    <form id="signupform" method="post" action="signup.php">
+        <fieldset>
+            <legend>{{ legend|default('Enter information to signup.') }}</legend>
+            <div>
+                <label for="name">Name</label>
+                <input id="name" type="text" placeholder="Name" name="name" />
+            </div>
+
+            <div>
+                <label for="uname">Username</label>
+                <input id="uname" type="text" placeholder="Username" name="uname" />
+            </div>
+
+            <div>
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="Email" name="email" />
+            </div>
+
+            <div>
+                <label for="password">Password</label>
+                <input id="password" type="password" placeholder="Password" name="password" />
+            </div>
+
+            <div>
+                <label for="rpass">Re-type Password</label>
+                <input id="rpass" type="password" placeholder="Re-type Password" name="rpass" />
+            </div>
+
+            <div>
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender">
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="utype">User Type</label>
+                <select id="utype" name="utype">
+                    <option value="STUDENT">Student</option>
+                    <option value="FACULTY">Faculty</option>
+                    <option value="STAFF">Staff</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="agree" id="agree-label" style="display: block;  clear: both;">
+                    <input id="agree" type="checkbox" name="agree" value="1"> I am a member of Hochschule Fulda
+                </label>
+
+                <input type="submit" name="submit" value="Signup" style="display: block; clear: both; margin-top: 5px; " />
+            </div>
+        </fieldset>
+    </form>
+
+{% endblock %}
