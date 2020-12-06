@@ -29,6 +29,33 @@
             </div>
         </fieldset>
     </form>
+    
+    {% if result is defined %}
+    <div>
+    <table style="width:100%">
+    <tr>
+    <th>Title</th>
+    <th>Posted on:</th>
+    <th>Category</th>
+    <th>Price</th>
+    <th>Status</th>
+    <th>Description</th>
+    </tr>
+            {% for r in result %}
+            <tr>
+            <td>{{ r['title']}}</td>
+            <td>{{ r['date_inserted']}}</td>
+            <td>{{ r['market_category']}}</td> 
+            <td>{{ r['Price']}}&euro;</td>
+            <td>{{ r['Status']}}</td>
+            <td>{{ r['text_body']}}</td>
+            </tr>
+            {% endfor %}
+            
+    </table>
+    </div> 
+    {% endif %}
+    
 
 {% endblock %}
 
