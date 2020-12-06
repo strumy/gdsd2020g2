@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '8108cc30caf33bc0cf4b294255c9f8f69e8df8a1',
+    'reference' => '22fabd09a7abe0af25d723cd9a6dbcef926c2e38',
     'name' => 'articulatedlogic/fuldamarkt',
   ),
   'versions' => 
@@ -31,7 +31,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '8108cc30caf33bc0cf4b294255c9f8f69e8df8a1',
+      'reference' => '22fabd09a7abe0af25d723cd9a6dbcef926c2e38',
     ),
     'components/jquery' => 
     array (
