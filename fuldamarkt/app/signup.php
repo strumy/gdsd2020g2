@@ -55,7 +55,7 @@ if ($request->getMethod() == "POST") {
 
     /*Check if User email has suffix, 'hs-fulda.de' */
     $domain_name = substr(strrchr($user_data['email'], "@"), 1);
-    if (strpos($domain_name, 'hs-fulda.de') == false) {
+    if (strpos($domain_name, 'hs-fulda.de') === false) {
         $message = 'Signup was unsuccessful, try again. The email, '. $user_data['email'] . ' is not a valid HS Fulda Student/Faculty/Staff email.';
         $hasError = true;
     }

@@ -24,7 +24,17 @@
       </form>
       <div class="profile"></div>
     </nav>
-  
+
+
+    {% if message %}
+        <div id="reports">{{ message }}</div>
+    {% endif %}
+
+    {% for error in errors %}
+        <div id="reports">{{ error }}</div>
+    {% endfor %}
+
+
     <div id="body" class="wrapper flex-grow-1">{% block body %}{% endblock %}</div>
     <div id="footer">
             {% block footer %}

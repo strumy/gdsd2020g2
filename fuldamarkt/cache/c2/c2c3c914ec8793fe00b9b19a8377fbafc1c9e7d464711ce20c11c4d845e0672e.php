@@ -69,16 +69,45 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
       </form>
       <div class=\"profile\"></div>
     </nav>
-  
+
+
+    ";
+        // line 29
+        if (($context["message"] ?? null)) {
+            // line 30
+            echo "        <div id=\"reports\">";
+            echo twig_escape_filter($this->env, ($context["message"] ?? null), "html", null, true);
+            echo "</div>
+    ";
+        }
+        // line 32
+        echo "
+    ";
+        // line 33
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(($context["errors"] ?? null));
+        foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
+            // line 34
+            echo "        <div id=\"reports\">";
+            echo twig_escape_filter($this->env, $context["error"], "html", null, true);
+            echo "</div>
+    ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 36
+        echo "
+
     <div id=\"body\" class=\"wrapper flex-grow-1\">";
-        // line 28
+        // line 38
         $this->displayBlock('body', $context, $blocks);
         echo "</div>
     <div id=\"footer\">
             ";
-        // line 30
+        // line 40
         $this->displayBlock('footer', $context, $blocks);
-        // line 33
+        // line 43
         echo "    </div>
 
     <script>
@@ -120,17 +149,17 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
         echo twig_escape_filter($this->env, ($context["title"] ?? null), "html", null, true);
     }
 
-    // line 28
+    // line 38
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
     }
 
-    // line 30
+    // line 40
     public function block_footer($context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 31
+        // line 41
         echo "                &copy; Copyright 2020 by <a href=\"http://fuldamarkt.de/\">FuldaMarkt </a>.
             ";
     }
@@ -147,7 +176,7 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
 
     public function getDebugInfo()
     {
-        return array (  134 => 31,  130 => 30,  124 => 28,  117 => 5,  82 => 33,  80 => 30,  75 => 28,  50 => 6,  46 => 5,  40 => 1,);
+        return array (  163 => 41,  159 => 40,  153 => 38,  146 => 5,  111 => 43,  109 => 40,  104 => 38,  100 => 36,  91 => 34,  87 => 33,  84 => 32,  78 => 30,  76 => 29,  50 => 6,  46 => 5,  40 => 1,);
     }
 
     public function getSourceContext()
@@ -178,7 +207,17 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
       </form>
       <div class=\"profile\"></div>
     </nav>
-  
+
+
+    {% if message %}
+        <div id=\"reports\">{{ message }}</div>
+    {% endif %}
+
+    {% for error in errors %}
+        <div id=\"reports\">{{ error }}</div>
+    {% endfor %}
+
+
     <div id=\"body\" class=\"wrapper flex-grow-1\">{% block body %}{% endblock %}</div>
     <div id=\"footer\">
             {% block footer %}
