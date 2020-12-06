@@ -1,0 +1,34 @@
+{% extends "base.twig" %}
+
+{% block body %}
+    <p>{{ body }}</p>
+    <form method="post" action="search_product.php">
+        <fieldset>
+            <legend>Search for items:</legend>
+            <div>
+                <label for="text_input">text_input</label>
+                <input id="text_input" type="text" placeholder="What are you looking for?" name="text_input">
+            </div>
+            <div>
+                <label for="categories">Choose a category</label>
+                <select name="categories" id="categories">
+                <option value="Electronics">Electronics</option>
+                <option value="Stationary Equipment">Stationary Equipment</option>
+                <option value="Services">Services</option>
+                </select>
+            </div>
+            <div>
+                <label for="sort_by">Sort by</label>
+                <select name="sort_by" id="sort_by">
+                <option value="Price">Price</option>
+                <option value="title">Name</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit" name="submit">Search</button>
+            </div>
+        </fieldset>
+    </form>
+
+{% endblock %}
+
