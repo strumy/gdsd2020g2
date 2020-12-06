@@ -14,24 +14,24 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '1.0.0+no-version-set',
-    'version' => '1.0.0.0',
+    'pretty_version' => 'dev-main',
+    'version' => 'dev-main',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
+    'reference' => '8108cc30caf33bc0cf4b294255c9f8f69e8df8a1',
     'name' => 'articulatedlogic/fuldamarkt',
   ),
   'versions' => 
   array (
     'articulatedlogic/fuldamarkt' => 
     array (
-      'pretty_version' => '1.0.0+no-version-set',
-      'version' => '1.0.0.0',
+      'pretty_version' => 'dev-main',
+      'version' => 'dev-main',
       'aliases' => 
       array (
       ),
-      'reference' => NULL,
+      'reference' => '8108cc30caf33bc0cf4b294255c9f8f69e8df8a1',
     ),
     'components/jquery' => 
     array (
@@ -112,12 +112,12 @@ private static $installed = array (
     ),
     'symfony/cache' => 
     array (
-      'pretty_version' => 'v4.4.16',
-      'version' => '4.4.16.0',
+      'pretty_version' => 'v4.4.17',
+      'version' => '4.4.17.0',
       'aliases' => 
       array (
       ),
-      'reference' => '7ab1528cac0328566895ad303e2a5111aef2b440',
+      'reference' => '6d330ca81ce5c98f22224c980507a7f7a7df82e8',
     ),
     'symfony/cache-contracts' => 
     array (
@@ -137,8 +137,8 @@ private static $installed = array (
     ),
     'symfony/expression-language' => 
     array (
-      'pretty_version' => 'v3.4.46',
-      'version' => '3.4.46.0',
+      'pretty_version' => 'v3.4.47',
+      'version' => '3.4.47.0',
       'aliases' => 
       array (
       ),
@@ -146,8 +146,8 @@ private static $installed = array (
     ),
     'symfony/http-foundation' => 
     array (
-      'pretty_version' => 'v3.4.46',
-      'version' => '3.4.46.0',
+      'pretty_version' => 'v3.4.47',
+      'version' => '3.4.47.0',
       'aliases' => 
       array (
       ),
@@ -200,12 +200,12 @@ private static $installed = array (
     ),
     'symfony/var-exporter' => 
     array (
-      'pretty_version' => 'v5.1.8',
-      'version' => '5.1.8.0',
+      'pretty_version' => 'v5.2.0',
+      'version' => '5.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'b4048bfc6248413592462c029381bdb2f7b6525f',
+      'reference' => 'fbc3507f23d263d75417e09a12d77c009f39676c',
     ),
     'twig/twig' => 
     array (

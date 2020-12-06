@@ -10,7 +10,8 @@
     "twig/twig": "3.*",
     "components/jquery": "~2.1",
     "components/jqueryui": "^1.11",
-    "erusev/parsedown": "1.6.1"
+    "erusev/parsedown": "1.6.1",
+    "ext-mysqli": "*"
   },
   "config": {
     "component-dir": "vendor/assets"

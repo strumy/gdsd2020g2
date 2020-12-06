@@ -34,9 +34,12 @@ $apppath_url = (
     ) . $_SERVER['HTTP_HOST'] .  $_SERVER['REQUEST_URI'];
 
 
+$host = "localhost";
+$db_name = "fuldamarkt_proddb";
+$dbuser = "root";
+$dbpass = "root";
+
 try {
-    $errors = array();
-    /* Load libraries */
     $loader = new Twig\Loader\FilesystemLoader('../template');
     $template = new Twig\Environment($loader, ['cache' => '../cache','debug' => 'true']);
 
@@ -44,8 +47,7 @@ try {
     $request = Request::createFromGlobals();
 
     /*Set DB Connection*/
-    $db = new \FluentPDO(new \PDO('mysql:host=' . 'localhost' . ';dbname=' . 'fuldamarkt_proddb' . '',
-        'root', 'root'));
+    $db = new \FluentPDO(new \PDO('mysql:host=' . $host . ';dbname=' . $db_name, $dbuser, $dbpass));
     $db->debug = false;
 
     /* Start Session */
@@ -53,5 +55,17 @@ try {
     $session->start();
 
 } catch (Exception $ex) {
-    $errors[] = $ex->getMessage();
+    echo $ex->getMessage();
+}
+
+try {
+    $dbi = mysqli_connect($host, $dbuser, $dbpass, $db_name);
+
+    if (!$dbi) {
+        echo "Error Occured: " . mysqli_connect_errno() . " Error message: " . mysqli_connect_error();
+        exit;
+    }
+}
+catch (Exception $ex) {
+    echo $ex->getMessage();
 }
