@@ -1,4 +1,4 @@
-//make sure you have 2 users in the 'users' table
+ //make sure you have 2 users in the 'users' table
 INSERT INTO `MARKET_TABLE`(`title`,`author_id`,`date_inserted`,`market_category`,`Price`,`Status`,`Sold_to`,`text_body`,`picture`) 
 VALUES('pen for sale', 2, NOW(), 'Stationary', 1.99, 'available', NULL, 'great for writing', NULL);
 
