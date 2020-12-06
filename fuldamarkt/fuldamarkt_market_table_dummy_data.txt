@@ -1,0 +1,24 @@
+//make sure you have 2 users in the 'users' table
+INSERT INTO `MARKET_TABLE`(`title`,`author_id`,`date_inserted`,`market_category`,`Price`,`Status`,`Sold_to`,`text_body`,`picture`) 
+VALUES('pen for sale', 2, NOW(), 'Stationary', 1.99, 'available', NULL, 'great for writing', NULL);
+
+INSERT INTO `MARKET_TABLE`(`title`,`author_id`,`date_inserted`,`market_category`,`Price`,`Status`,`Sold_to`,`text_body`,`picture`) 
+VALUES('PHP book for sale', 2, NOW(), 'Stationary', 4.99, 'available', NULL, 'PHP for dummies', NULL);
+
+INSERT INTO `MARKET_TABLE`(`title`,`author_id`,`date_inserted`,`market_category`,`Price`,`Status`,`Sold_to`,`text_body`,`picture`) 
+VALUES('SQL book for sale', 1, NOW(), 'Stationary', 4.99, 'available', NULL, 'SQL for dummies', NULL);
+
+INSERT INTO `MARKET_TABLE`(`title`,`author_id`,`date_inserted`,`market_category`,`Price`,`Status`,`Sold_to`,`text_body`,`picture`) 
+VALUES('Laptop for sale', 2, NOW(), 'Electronics', 299.99, 'available', NULL, 'With core i7 and 8GBs of RAM', NULL);
+
+INSERT INTO `MARKET_TABLE`(`title`,`author_id`,`date_inserted`,`market_category`,`Price`,`Status`,`Sold_to`,`text_body`,`picture`) 
+VALUES('Laptop for sale', 1, NOW(), 'Electronics', 499.99, 'available', NULL, 'With core i7 and 16GBs of RAM', NULL);
+
+INSERT INTO `MARKET_TABLE`(`title`,`author_id`,`date_inserted`,`market_category`,`Price`,`Status`,`Sold_to`,`text_body`,`picture`) 
+VALUES('PHP lectures', 2, NOW(), 'Services', 59.99, 'available', NULL, 'Register in this course if you are looking to become a PHP master!', NULL);
+
+INSERT INTO `MARKET_TABLE`(`title`,`author_id`,`date_inserted`,`market_category`,`Price`,`Status`,`Sold_to`,`text_body`,`picture`) 
+VALUES('SQL lectures', 1, NOW(), 'Services', 79.99, 'available', NULL, 'Register in this course if you are looking to become an SQL master!', NULL);
+
+INSERT INTO `MARKET_TABLE`(`title`,`author_id`,`date_inserted`,`market_category`,`Price`,`Status`,`Sold_to`,`text_body`,`picture`) 
+VALUES('Lenovo Laptop for sale', 1, NOW(), 'Electronics', 499.99, 'available', NULL, 'With core i7 and 16GBs of RAM', NULL);
