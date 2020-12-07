@@ -5,6 +5,13 @@
     <title>{% block title %}{{ title }}{% endblock %}</title>
     <style>{{ source('home_style.css') }}</style>
     <link href="../template/static/css/style.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="{{ path_url }}/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ path_url }}/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="{{ path_url }}/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ path_url }}/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ path_url }}/css/util.css">
+	  <link rel="stylesheet" type="text/css" href="{{ path_url }}/css/main.css">
+    
     {% block headtags %}{% endblock %}
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -28,12 +35,7 @@
         {% if session.get('is_authenticated') %}
             <a href="userhome.php" id="userhomelink">{% if session.get('user_info').full_name %}{{ session.get('user_info').full_name }}'s{% else %}User{% endif %} Home</a>
         {% endif %}
-      <div class="search-icon"><span class="fas fa-search"></span></div>
-      <div class="cancel-icon"><span class="fas fa-times"></span></div>
-      <form action="#">
-        <input type="search" class="search-data" placeholder="Search" required>
-        <button type="submit" class="fas fa-search"></button>
-      </form>
+      
       <div class="profile"></div>
     </nav>
 
@@ -54,32 +56,11 @@
         {% endblock %}
     </div>
 
-    <script>
-    const menuBtn = document.querySelector(".menu-icon span");
-    const searchBtn = document.querySelector(".search-icon");
-    const cancelBtn = document.querySelector(".cancel-icon");
-    const items = document.querySelector(".nav-items");
-    const form = document.querySelector("form");
-    menuBtn.onclick = ()=>{
-      items.classList.add("active");
-      menuBtn.classList.add("hide");
-      searchBtn.classList.add("hide");
-      cancelBtn.classList.add("show");
-    }
-    cancelBtn.onclick = ()=>{
-      items.classList.remove("active");
-      menuBtn.classList.remove("hide");
-      searchBtn.classList.remove("hide");
-      cancelBtn.classList.remove("show");
-      form.classList.remove("active");
-      cancelBtn.style.color = "#ff3d00";
-    }
-    searchBtn.onclick = ()=>{
-      form.classList.add("active");
-      searchBtn.classList.add("hide");
-      cancelBtn.classList.add("show");
-    }
-  </script>
-
+  
+  <script src="{{ path_url }}/vendor/animsition/js/animsition.min.js"></script>
+	<script src="{{ path_url }}/vendor/bootstrap/js/popper.js"></script>
+	<script src="{{ path_url }}/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="{{ path_url }}/vendor/select2/select2.min.js"></script>
+  <script src="{{ path_url }}/js/main.js"></script>
   </body>
 </html>
