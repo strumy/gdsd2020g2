@@ -4,18 +4,30 @@
 <head>
     <title>{% block title %}{{ title }}{% endblock %}</title>
     <style>{{ source('home_style.css') }}</style>
-
+    <link href="../template/static/css/style.css" rel="stylesheet" type="text/css" media="screen"/>
+    {% block headtags %}{% endblock %}
 </head>
 <body class="d-flex flex-column min-vh-100">
     <nav>
       <div class="menu-icon"><span class="fas fa-bars"></span></div>
       <div class="logo">FuldaMarkt</div>
       <div class="nav-items">
-        <li><a href="#">Home</a></li>
+        <li><a href="index.php">Home</a></li>
         <li><a href="#">Events</a></li>
         <li><a href="#">Market</a></li>
         <li><a href="#">About</a></li>
+          {% if session.get('is_authenticated') %}
+              <li><a href="logout.php">Logout</a></li>
+          {% else %}
+              <li><a href="login.php">Login</a></li>
+              <li><a href="signup.php">Signup</a></li>
+          {% endif %}
+
+
       </div>
+        {% if session.get('is_authenticated') %}
+            <a href="userhome.php" id="userhomelink">{% if session.get('user_info').full_name %}{{ session.get('user_info').full_name }}'s{% else %}User{% endif %} Home</a>
+        {% endif %}
       <div class="search-icon"><span class="fas fa-search"></span></div>
       <div class="cancel-icon"><span class="fas fa-times"></span></div>
       <form action="#">
@@ -29,17 +41,17 @@
     {% if message %}
         <div id="reports">{{ message }}</div>
     {% endif %}
-
+    {% if errors %}
     {% for error in errors %}
-        <div id="reports">{{ error }}</div>
+        <div id="errors">{{ error }}</div>
     {% endfor %}
-
+    {% endif %}
 
     <div id="body" class="wrapper flex-grow-1">{% block body %}{% endblock %}</div>
     <div id="footer">
-            {% block footer %}
-                &copy; Copyright 2020 by <a href="http://fuldamarkt.de/">FuldaMarkt </a>.
-            {% endblock %}
+        {% block footer %}
+            &copy; Copyright 2020 by <a href="#">FuldaMarkt </a>.
+        {% endblock %}
     </div>
 
     <script>

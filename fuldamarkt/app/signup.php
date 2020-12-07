@@ -2,40 +2,6 @@
 
 require '../project.php';
 
-function addUser($db, $errors, $user_data = array()){
-    $executed = false;
-
-    if (empty($user_data)) {
-        return $executed;
-    }
-
-    $user_data['date_inserted'] = new \FluentLiteral('NOW()');
-
-    try {
-        $query = $db->insertInto('users')->values($user_data);
-        $executed = $query->execute(true);
-    } catch (\Exception $ex) {
-        $errors[] = "Add User Error: " . $ex->getMessage();
-    }
-    return $executed;
-}
-
-function userExists($db, $errors, $email)
-{
-    try {
-        $query = $db->from("users")
-            ->select(null)
-            ->select(array('id'))
-            ->where(array("email" => $email))
-            ->fetch();
-    } catch (\Exception $ex) {
-        $errors[] = "UserExists Error: " . $ex->getMessage();
-        return false;
-    }
-
-    return $query;
-}
-
 $temp_name = 'signup.twig';
 $title = 'Signup';
 $body = 'Signup Here';
@@ -80,8 +46,7 @@ if ($request->getMethod() == "POST") {
 
 }
 
-/* Setting Template Variable, $page_data */
-$page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'message' => $message];
+$page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'message' => $message, 'path_url' => $path_url];
 
 try {
     echo $template->render($temp_name, $page_data);

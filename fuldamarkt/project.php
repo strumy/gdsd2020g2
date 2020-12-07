@@ -1,6 +1,7 @@
 <?php
 
 require_once 'vendor/autoload.php';
+require_once 'app/functions.php';
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -33,6 +34,16 @@ $apppath_url = (
         'http://' : 'https://'
     ) . $_SERVER['HTTP_HOST'] .  $_SERVER['REQUEST_URI'];
 
+$path_url = (
+    empty($_SERVER['HTTPS']) ?
+        'http://' : 'https://'
+    ) .
+    $_SERVER['HTTP_HOST'] .
+    (
+    strlen($path_root) ?
+        ("/" . $path_root) : ''
+    ) .
+    '/fuldamarkt/';
 
 $host = "localhost";
 $db_name = "fuldamarkt_proddb";

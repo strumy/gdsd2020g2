@@ -1,0 +1,22 @@
+{% extends "base.twig" %}
+
+{% block headtags %}
+    <script src="{{ path_url }}/vendor/components/jquery/jquery.min.js" type="text/javascript"></script>
+    <link href="{{ path_url }}/vendor/components/jqueryui/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" media="screen"/>
+    <script src="{{ path_url }}/vendor/components/jqueryui/jquery-ui.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $("#errors").hide();
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    {% if session.get('is_authenticated') %}
+    <h1>{{ page_title }}</h1>
+    {% else %}
+
+    {% endif %}
+{% endblock %}

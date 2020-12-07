@@ -25,6 +25,7 @@ class __TwigTemplate_f81b61612396652c10fe28e7c2ed1bd622c781384d802ab5e9a690541c8
         $this->source = $this->getSourceContext();
 
         $this->blocks = [
+            'headtags' => [$this, 'block_headtags'],
             'body' => [$this, 'block_body'],
         ];
     }
@@ -43,17 +44,45 @@ class __TwigTemplate_f81b61612396652c10fe28e7c2ed1bd622c781384d802ab5e9a690541c8
     }
 
     // line 3
-    public function block_body($context, array $blocks = [])
+    public function block_headtags($context, array $blocks = [])
     {
         $macros = $this->macros;
         // line 4
+        echo "    <script src=\"";
+        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
+        echo "/vendor/components/jquery/jquery.min.js\" type=\"text/javascript\"></script>
+    <link href=\"";
+        // line 5
+        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
+        echo "/vendor/components/jqueryui/themes/smoothness/jquery-ui.min.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\"/>
+    <script src=\"";
+        // line 6
+        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
+        echo "/vendor/components/jqueryui/jquery-ui.min.js\" type=\"text/javascript\"></script>
+
+    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js\" integrity=\"sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==\" crossorigin=\"anonymous\" type=\"text/javascript\"></script>
+
+    <script type=\"text/javascript\">
+        \$(document).ready(function()
+        {
+            \$(\"#errors\").hide();
+        });
+    </script>
+";
+    }
+
+    // line 18
+    public function block_body($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        // line 19
         echo "    <p>";
         echo twig_escape_filter($this->env, ($context["body"] ?? null), "html", null, true);
         echo "</p>
     <form id=\"signupform\" method=\"post\" action=\"signup.php\">
         <fieldset>
             <legend>";
-        // line 7
+        // line 22
         echo twig_escape_filter($this->env, (((isset($context["legend"]) || array_key_exists("legend", $context))) ? (_twig_default_filter(($context["legend"] ?? null), "Enter information to signup.")) : ("Enter information to signup.")), "html", null, true);
         echo "</legend>
             <div>
@@ -108,6 +137,58 @@ class __TwigTemplate_f81b61612396652c10fe28e7c2ed1bd622c781384d802ab5e9a690541c8
         </fieldset>
     </form>
 
+    <script type=\"text/javascript\">
+        \$(document).ready(function(){
+            \$(\"#signupform\").validate({
+                ignore: \".ignore\",
+                groups: {
+                    agree: \"agree\"
+                },
+                errorPlacement: function(error, element) {
+                    if (element.attr(\"name\") === \"agree\") {
+                        error.insertAfter(\"#agree-label\");
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                rules:{
+                    name:{ required: true , maxlength: 100 },
+                    uname:{ required: true , maxlength: 100 },
+                    email:{ required: true, email: true , maxlength: 50},
+                    password:{ required: true, maxlength: 20},
+                    rpass:{ required: true, maxlength: 20, equalTo: \"#password\" },
+                    gender:{ required: true },
+                    utype: { required: true }
+                },
+                messages:{
+                    name: {
+                        required: \"Enter full name.\",
+                        maxlength: \"Name can't be longer than 100 characters.\"
+                    },
+                    uname: {
+                        required: \"Enter username.\",
+                        maxlength: \"Username can't be longer than 50 characters.\"
+                    },
+                    email: {
+                        required: \"Enter valid email.\",
+                        email: \"Please enter a valid email.\",
+                        maxlength: \"Email can't be longer than 50 characters.\"
+                    },
+                    password: {
+                        required: \"Password minimum 5 characters.\",
+                        maxlength: \"Password can't be longer than 20 characters.\"
+                    },
+                    rpass: {
+                        required: \"Enter password again.\",
+                        equalTo: \"Password don't match.\"
+                    },
+                    gender: \"Please select gender.\",
+                    utype: \"Please select user type.\"
+                }
+            });
+        });
+    </script>
+
 ";
     }
 
@@ -123,12 +204,27 @@ class __TwigTemplate_f81b61612396652c10fe28e7c2ed1bd622c781384d802ab5e9a690541c8
 
     public function getDebugInfo()
     {
-        return array (  57 => 7,  50 => 4,  46 => 3,  35 => 1,);
+        return array (  86 => 22,  79 => 19,  75 => 18,  60 => 6,  56 => 5,  51 => 4,  47 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("{% extends \"base.twig\" %}
+
+{% block headtags %}
+    <script src=\"{{ path_url }}/vendor/components/jquery/jquery.min.js\" type=\"text/javascript\"></script>
+    <link href=\"{{ path_url }}/vendor/components/jqueryui/themes/smoothness/jquery-ui.min.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\"/>
+    <script src=\"{{ path_url }}/vendor/components/jqueryui/jquery-ui.min.js\" type=\"text/javascript\"></script>
+
+    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js\" integrity=\"sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==\" crossorigin=\"anonymous\" type=\"text/javascript\"></script>
+
+    <script type=\"text/javascript\">
+        \$(document).ready(function()
+        {
+            \$(\"#errors\").hide();
+        });
+    </script>
+{% endblock %}
 
 {% block body %}
     <p>{{ body }}</p>
@@ -186,6 +282,58 @@ class __TwigTemplate_f81b61612396652c10fe28e7c2ed1bd622c781384d802ab5e9a690541c8
             </div>
         </fieldset>
     </form>
+
+    <script type=\"text/javascript\">
+        \$(document).ready(function(){
+            \$(\"#signupform\").validate({
+                ignore: \".ignore\",
+                groups: {
+                    agree: \"agree\"
+                },
+                errorPlacement: function(error, element) {
+                    if (element.attr(\"name\") === \"agree\") {
+                        error.insertAfter(\"#agree-label\");
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                rules:{
+                    name:{ required: true , maxlength: 100 },
+                    uname:{ required: true , maxlength: 100 },
+                    email:{ required: true, email: true , maxlength: 50},
+                    password:{ required: true, maxlength: 20},
+                    rpass:{ required: true, maxlength: 20, equalTo: \"#password\" },
+                    gender:{ required: true },
+                    utype: { required: true }
+                },
+                messages:{
+                    name: {
+                        required: \"Enter full name.\",
+                        maxlength: \"Name can't be longer than 100 characters.\"
+                    },
+                    uname: {
+                        required: \"Enter username.\",
+                        maxlength: \"Username can't be longer than 50 characters.\"
+                    },
+                    email: {
+                        required: \"Enter valid email.\",
+                        email: \"Please enter a valid email.\",
+                        maxlength: \"Email can't be longer than 50 characters.\"
+                    },
+                    password: {
+                        required: \"Password minimum 5 characters.\",
+                        maxlength: \"Password can't be longer than 20 characters.\"
+                    },
+                    rpass: {
+                        required: \"Enter password again.\",
+                        equalTo: \"Password don't match.\"
+                    },
+                    gender: \"Please select gender.\",
+                    utype: \"Please select user type.\"
+                }
+            });
+        });
+    </script>
 
 {% endblock %}
 ", "signup.twig", "/var/www/html/gdsd2020g2/fuldamarkt/template/signup.twig");

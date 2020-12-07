@@ -2,6 +2,6 @@
 
 require '../project.php';
 
-$page_data = ['title' => 'Home Page', 'body' => 'body content'];
+$page_data = ['title' => 'Home', 'body' => 'Welcome to FuldaMarkt'];
 
 echo $template->render('index.twig', $page_data);

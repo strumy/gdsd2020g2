@@ -1,0 +1,31 @@
+
+#reports {
+    color: #000;
+    width: auto;
+    height: 20px;
+    background: #cfc;
+    border: 1px solid #0f0;
+    padding: 5px;
+    margin: 3px;
+}
+
+#errors {
+    color: #000;
+    width: auto;
+    height: 20px;
+    background: #FCC;
+    border: 1px solid #F00;
+    padding: 5px;
+    margin: 3px;
+}
+
+#userhomelink{
+    padding: 1em;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#userhomelink:hover {
+    background: none;
+    color: #E43C15;
+}

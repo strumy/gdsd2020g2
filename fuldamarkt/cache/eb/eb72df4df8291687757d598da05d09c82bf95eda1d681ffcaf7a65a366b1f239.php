@@ -48,8 +48,10 @@ class __TwigTemplate_352cf5670191b3237e5532f789aafff87e7919921f06ca06d3470426296
         $macros = $this->macros;
         // line 8
         echo "
-    this is index body, to login click here: <a href=\"login.php\">Login</a><br/>
-    Click here to signup: <a href=\"signup.php\">Signup</a>
+    <h1>";
+        // line 9
+        echo twig_escape_filter($this->env, ($context["title"] ?? null), "html", null, true);
+        echo "</h1>
 
 ";
     }
@@ -66,7 +68,7 @@ class __TwigTemplate_352cf5670191b3237e5532f789aafff87e7919921f06ca06d3470426296
 
     public function getDebugInfo()
     {
-        return array (  50 => 8,  46 => 7,  35 => 1,);
+        return array (  53 => 9,  50 => 8,  46 => 7,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -79,8 +81,7 @@ Twig documentation to work with template design; https://twig.symfony.com/doc/3.
 
 {% block body %}
 
-    this is index body, to login click here: <a href=\"login.php\">Login</a><br/>
-    Click here to signup: <a href=\"signup.php\">Signup</a>
+    <h1>{{ title }}</h1>
 
 {% endblock %}
 

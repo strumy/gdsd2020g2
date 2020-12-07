@@ -1,5 +1,20 @@
 {% extends "base.twig" %}
 
+{% block headtags %}
+    <script src="{{ path_url }}/vendor/components/jquery/jquery.min.js" type="text/javascript"></script>
+    <link href="{{ path_url }}/vendor/components/jqueryui/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" media="screen"/>
+    <script src="{{ path_url }}/vendor/components/jqueryui/jquery-ui.min.js" type="text/javascript"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $("#errors").hide();
+        });
+    </script>
+{% endblock %}
+
 {% block body %}
     <p>{{ body }}</p>
     <form id="signupform" method="post" action="signup.php">
@@ -56,5 +71,57 @@
             </div>
         </fieldset>
     </form>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#signupform").validate({
+                ignore: ".ignore",
+                groups: {
+                    agree: "agree"
+                },
+                errorPlacement: function(error, element) {
+                    if (element.attr("name") === "agree") {
+                        error.insertAfter("#agree-label");
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                rules:{
+                    name:{ required: true , maxlength: 100 },
+                    uname:{ required: true , maxlength: 100 },
+                    email:{ required: true, email: true , maxlength: 50},
+                    password:{ required: true, maxlength: 20},
+                    rpass:{ required: true, maxlength: 20, equalTo: "#password" },
+                    gender:{ required: true },
+                    utype: { required: true }
+                },
+                messages:{
+                    name: {
+                        required: "Enter full name.",
+                        maxlength: "Name can't be longer than 100 characters."
+                    },
+                    uname: {
+                        required: "Enter username.",
+                        maxlength: "Username can't be longer than 50 characters."
+                    },
+                    email: {
+                        required: "Enter valid email.",
+                        email: "Please enter a valid email.",
+                        maxlength: "Email can't be longer than 50 characters."
+                    },
+                    password: {
+                        required: "Password minimum 5 characters.",
+                        maxlength: "Password can't be longer than 20 characters."
+                    },
+                    rpass: {
+                        required: "Enter password again.",
+                        equalTo: "Password don't match."
+                    },
+                    gender: "Please select gender.",
+                    utype: "Please select user type."
+                }
+            });
+        });
+    </script>
 
 {% endblock %}

@@ -28,6 +28,7 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
 
         $this->blocks = [
             'title' => [$this, 'block_title'],
+            'headtags' => [$this, 'block_headtags'],
             'body' => [$this, 'block_body'],
             'footer' => [$this, 'block_footer'],
         ];
@@ -49,19 +50,53 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
         // line 6
         echo twig_source($this->env, "home_style.css");
         echo "</style>
-
-</head>
+    <link href=\"../template/static/css/style.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\"/>
+    ";
+        // line 8
+        $this->displayBlock('headtags', $context, $blocks);
+        // line 9
+        echo "</head>
 <body class=\"d-flex flex-column min-vh-100\">
     <nav>
       <div class=\"menu-icon\"><span class=\"fas fa-bars\"></span></div>
       <div class=\"logo\">FuldaMarkt</div>
       <div class=\"nav-items\">
-        <li><a href=\"#\">Home</a></li>
+        <li><a href=\"index.php\">Home</a></li>
         <li><a href=\"#\">Events</a></li>
         <li><a href=\"#\">Market</a></li>
         <li><a href=\"#\">About</a></li>
+          ";
+        // line 19
+        if (twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "is_authenticated"], "method", false, false, false, 19)) {
+            // line 20
+            echo "              <li><a href=\"logout.php\">Logout</a></li>
+          ";
+        } else {
+            // line 22
+            echo "              <li><a href=\"login.php\">Login</a></li>
+              <li><a href=\"signup.php\">Signup</a></li>
+          ";
+        }
+        // line 25
+        echo "
+
       </div>
-      <div class=\"search-icon\"><span class=\"fas fa-search\"></span></div>
+        ";
+        // line 28
+        if (twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "is_authenticated"], "method", false, false, false, 28)) {
+            // line 29
+            echo "            <a href=\"userhome.php\" id=\"userhomelink\">";
+            if (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "user_info"], "method", false, false, false, 29), "full_name", [], "any", false, false, false, 29)) {
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "user_info"], "method", false, false, false, 29), "full_name", [], "any", false, false, false, 29), "html", null, true);
+                echo "'s";
+            } else {
+                echo "User";
+            }
+            echo " Home</a>
+        ";
+        }
+        // line 31
+        echo "      <div class=\"search-icon\"><span class=\"fas fa-search\"></span></div>
       <div class=\"cancel-icon\"><span class=\"fas fa-times\"></span></div>
       <form action=\"#\">
         <input type=\"search\" class=\"search-data\" placeholder=\"Search\" required>
@@ -72,42 +107,45 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
 
 
     ";
-        // line 29
+        // line 41
         if (($context["message"] ?? null)) {
-            // line 30
+            // line 42
             echo "        <div id=\"reports\">";
             echo twig_escape_filter($this->env, ($context["message"] ?? null), "html", null, true);
             echo "</div>
     ";
         }
-        // line 32
-        echo "
+        // line 44
+        echo "    ";
+        if (($context["errors"] ?? null)) {
+            // line 45
+            echo "    ";
+            $context['_parent'] = $context;
+            $context['_seq'] = twig_ensure_traversable(($context["errors"] ?? null));
+            foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
+                // line 46
+                echo "        <div id=\"errors\">";
+                echo twig_escape_filter($this->env, $context["error"], "html", null, true);
+                echo "</div>
     ";
-        // line 33
-        $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(($context["errors"] ?? null));
-        foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-            // line 34
-            echo "        <div id=\"reports\">";
-            echo twig_escape_filter($this->env, $context["error"], "html", null, true);
-            echo "</div>
-    ";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 48
+            echo "    ";
         }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 36
+        // line 49
         echo "
-
     <div id=\"body\" class=\"wrapper flex-grow-1\">";
-        // line 38
+        // line 50
         $this->displayBlock('body', $context, $blocks);
         echo "</div>
     <div id=\"footer\">
-            ";
-        // line 40
+        ";
+        // line 52
         $this->displayBlock('footer', $context, $blocks);
-        // line 43
+        // line 55
         echo "    </div>
 
     <script>
@@ -149,19 +187,25 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
         echo twig_escape_filter($this->env, ($context["title"] ?? null), "html", null, true);
     }
 
-    // line 38
+    // line 8
+    public function block_headtags($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+    }
+
+    // line 50
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
     }
 
-    // line 40
+    // line 52
     public function block_footer($context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 41
-        echo "                &copy; Copyright 2020 by <a href=\"http://fuldamarkt.de/\">FuldaMarkt </a>.
-            ";
+        // line 53
+        echo "            &copy; Copyright 2020 by <a href=\"#\">FuldaMarkt </a>.
+        ";
     }
 
     public function getTemplateName()
@@ -176,7 +220,7 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
 
     public function getDebugInfo()
     {
-        return array (  163 => 41,  159 => 40,  153 => 38,  146 => 5,  111 => 43,  109 => 40,  104 => 38,  100 => 36,  91 => 34,  87 => 33,  84 => 32,  78 => 30,  76 => 29,  50 => 6,  46 => 5,  40 => 1,);
+        return array (  207 => 53,  203 => 52,  197 => 50,  191 => 8,  184 => 5,  149 => 55,  147 => 52,  142 => 50,  139 => 49,  136 => 48,  127 => 46,  122 => 45,  119 => 44,  113 => 42,  111 => 41,  99 => 31,  88 => 29,  86 => 28,  81 => 25,  76 => 22,  72 => 20,  70 => 19,  58 => 9,  56 => 8,  51 => 6,  47 => 5,  41 => 1,);
     }
 
     public function getSourceContext()
@@ -187,18 +231,30 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
 <head>
     <title>{% block title %}{{ title }}{% endblock %}</title>
     <style>{{ source('home_style.css') }}</style>
-
+    <link href=\"../template/static/css/style.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\"/>
+    {% block headtags %}{% endblock %}
 </head>
 <body class=\"d-flex flex-column min-vh-100\">
     <nav>
       <div class=\"menu-icon\"><span class=\"fas fa-bars\"></span></div>
       <div class=\"logo\">FuldaMarkt</div>
       <div class=\"nav-items\">
-        <li><a href=\"#\">Home</a></li>
+        <li><a href=\"index.php\">Home</a></li>
         <li><a href=\"#\">Events</a></li>
         <li><a href=\"#\">Market</a></li>
         <li><a href=\"#\">About</a></li>
+          {% if session.get('is_authenticated') %}
+              <li><a href=\"logout.php\">Logout</a></li>
+          {% else %}
+              <li><a href=\"login.php\">Login</a></li>
+              <li><a href=\"signup.php\">Signup</a></li>
+          {% endif %}
+
+
       </div>
+        {% if session.get('is_authenticated') %}
+            <a href=\"userhome.php\" id=\"userhomelink\">{% if session.get('user_info').full_name %}{{ session.get('user_info').full_name }}'s{% else %}User{% endif %} Home</a>
+        {% endif %}
       <div class=\"search-icon\"><span class=\"fas fa-search\"></span></div>
       <div class=\"cancel-icon\"><span class=\"fas fa-times\"></span></div>
       <form action=\"#\">
@@ -212,17 +268,17 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
     {% if message %}
         <div id=\"reports\">{{ message }}</div>
     {% endif %}
-
+    {% if errors %}
     {% for error in errors %}
-        <div id=\"reports\">{{ error }}</div>
+        <div id=\"errors\">{{ error }}</div>
     {% endfor %}
-
+    {% endif %}
 
     <div id=\"body\" class=\"wrapper flex-grow-1\">{% block body %}{% endblock %}</div>
     <div id=\"footer\">
-            {% block footer %}
-                &copy; Copyright 2020 by <a href=\"http://fuldamarkt.de/\">FuldaMarkt </a>.
-            {% endblock %}
+        {% block footer %}
+            &copy; Copyright 2020 by <a href=\"#\">FuldaMarkt </a>.
+        {% endblock %}
     </div>
 
     <script>
