@@ -1,0 +1,42 @@
+{% extends "base.twig" %}
+
+{% block body %}
+    <p>{{ body }}</p>
+    <form method="post" action="create_product.php" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Post an item to the market:</legend>
+            <div>
+                <label for="title_input">Post Title</label>
+                <input id="title_input" type="text" placeholder="Title for your item posting" name="title_input">
+            </div>
+            <div>
+                <label for="text_input">Post Description</label>
+                <input id="text_input" type="text" placeholder="Describe the item you want to post" name="text_input">
+            </div>
+            <div>
+                <label for="Price">Price for the item in euros</label>
+                <input id="Price" type="number" placeholder="" name="Price">
+            </div>
+            <div>
+                <label for="categories">Choose a category</label>
+                <select name="categories" id="categories">
+                <option value="Electronics">Electronics</option>
+                <option value="Stationary">Stationary Equipment</option>
+                <option value="Services">Services</option>
+                </select>
+            </div>
+            <div>
+                <label for="picture">Picture of the item</label>
+                <input id="picture" type="file" name="picture[]" accept="image/jpeg" multiple>
+            </div>
+            <div>
+                <button type="submit" name="submit">Post item</button>
+            </div>
+        </fieldset>
+    </form>
+    
+    
+    
+
+{% endblock %}
+
