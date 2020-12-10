@@ -29,30 +29,32 @@
             </div>
         </fieldset>
     </form>
+    {% if check_auth %}
+       
+            <div>
+                <button type="button"><a href="create_product.php">Post an Item</a></button>
+            </div>
+        
+    {% endif %}
     
     {% if result is defined %}
     <div>
-    <table style="width:100%">
-    <tr>
-    <th>Title</th>
-    <th>Posted on:</th>
-    <th>Category</th>
-    <th>Price</th>
-    <th>Status</th>
-    <th>Description</th>
-    </tr>
-            {% for r in result %}
-            <tr>
-            <td>{{ r['title']}}</td>
-            <td>{{ r['date_inserted']}}</td>
-            <td>{{ r['market_category']}}</td> 
-            <td>{{ r['Price']}}&euro;</td>
-            <td>{{ r['Status']}}</td>
-            <td>{{ r['text_body']}}</td>
-            </tr>
-            {% endfor %}
-            
-    </table>
+        {% for r in result %}
+        <h1>{{ r['title']}}</h1>
+        <p>Date of Posting: {{ r['date_inserted']}}</p>
+        <p>Market category: {{ r['market_category']}}</p> 
+        <p>Price: {{ r['Price']}}&euro;</p>
+        <p>Status: {{ r['Status']}}</p>
+        <p>Description : {{ r['text_body']}}</p>
+        {% for p in search_data_pictures %}
+            {% if p['directory'] == r['picture'] %}
+                {% for p2 in p['images'] %}
+                    <img src={{ "#{p['directory'] ~ p2}" }}  width="500" height="600">
+                {% endfor %} 
+            {% endif %}
+        {% endfor %} 
+        {% endfor %}            
+    
     </div> 
     {% endif %}
     
