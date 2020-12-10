@@ -2,59 +2,102 @@
 
 require '../project.php';
 
-//need to include user data somehow into product data
 
 
-function post_product($db, $errors, $product_data)
+
+function post_product($dbi, $errors, $input_data,$session)
 {
-    
-        $executed = false;
-    
-        if (empty($product_data)) {
-            return $executed;
-        }
-        try {
-            $query = $db->insertInto('MARKET_TABLE')->values($product_data);
-            $executed = $query->execute(true);
-        } catch (\Exception $ex) {
-            $errors[] = "Add Product Error: " . $ex->getMessage();
-        }
+    $executed = false;
+    $select_picture_directory = false;
+    $title_input = $input_data['title'];
+    $text_input = $input_data['text_input'];
+    $price = $input_data['price'];
+    $category = $input_data['category'];
+    // $picture = $input_data['picture'];
+    $user_data = $session->get('user_info');
+    $user_id = $user_data['id'];
+
+   
+    if(!$dbi ){
+        die('Could not connect: ' . mysqli_error());
+        $errors[] = "Insert query failed: " . $ex->getMessage();
         return $executed;
+        }
+         
+    mysqli_select_db($dbi, 'fuldamarkt_proddb');   
+
+    $sql_query1 = "INSERT INTO `MARKET_TABLE`(`title`,`author_id`,`date_inserted`,`market_category`,`Price`,`Status`,`Sold_to`,`text_body`,`picture`) 
+    VALUES('$title_input', $user_id, NOW(), '$category', $price, 'available', NULL, '$text_input', CONCAT('/uploads/$user_id/posts/', 
+    UUID_SHORT(), '/'))";
+    $sql_query2 = "SELECT picture from `MARKET_TABLE` WHERE title='$title_input' AND author_id = $user_id AND text_body='$text_input';";
+    try {
+        $query_result = mysqli_query($dbi, $sql_query1);
+        if($query_result){
+            $query_result2 = mysqli_query($dbi, $sql_query2);
+            $picture_directory = $query_result2->fetch_all(MYSQLI_ASSOC);
+            $picture_directory = implode('',$picture_directory['0']);
+       }
+    } catch (\Exception $ex) {
+        $errors[] = "Insert query failed: " . $ex->getMessage();
+        
+        return $executed;
+    }
+   
+    
+    return $picture_directory;
 }
 
 
-$temp_name = 'market.twig';
-$title = 'Market Page';
-$body = 'Search for items';
+
+
+
+
+$temp_name = 'create_post.twig';
+$title = 'Post an item:';
+$body = '';
 $message = '';
+$errors = '';
 $hasError = false;
 
 
-if ($request->getMethod() == "POST") {
-    $product_data = array(
-        'title' => trim($request->get('title_input_field')),
-        'category' => trim($request->get('category')), //should have a default value in the drop down menu
-        'price' => trim($request->get('price'))    //should have a default value in the drop down menu
-    );
 
-    if ($is_authenticated){
-        if (post_product($db, $errors, $product_data)) {
-        $title = 'Create Post';
-        $message = 'Your post was successfully added';
-        $temp_name = 'market.twig';
-        }
-        else 
-        {
-        $message = 'Your post was not added, try again.';
-        $hasError = true;
+
+
+if ($request->getMethod() == "POST") {
+   
+    $input_data = array(
+        'title' => trim($request->get('title_input')),
+        'text_input' => trim($request->get('text_input')), 
+        'price' => trim($request->get('Price')) ,   
+        'category' => trim($request->get('categories')) 
+    );
+       $picture_directory = post_product($dbi, $errors, $input_data,$session);  //the query returns a directory for the images 
+       $targetDir = $_SERVER['DOCUMENT_ROOT'] . $picture_directory;  //append the picture directory to the document root of the server
+       
+       if (!file_exists($targetDir)) {
+        $created = mkdir($targetDir, 0755, true);  
+       }
+       
+       $fileNames = array_filter($_FILES['picture']['name']);
+       
+       try{
+       if(!empty($fileNames)){ 
+        foreach($_FILES['picture']['name'] as $key=>$val){ 
+            // File upload path 
+            $fileName = basename($_FILES['picture']['name'][$key]); 
+            $targetFilePath = $targetDir . $fileName;            
+            move_uploaded_file($_FILES["picture"]["tmp_name"][$key], $targetFilePath); 
+                         
         } 
-    //VS Code tells me this is an unexpected else :/ 
-    else        
-    {
-    $message = 'You need to be logged in in order to post on the market. Please login or sign up.';
-    $hasError = true;
+        }
+       }
+     catch (\Exception $ex) {
+        $errors[] = "File Upload Error: " . $ex->getMessage();
+        return false;
     }
-    }
+    $temp_name = 'market.twig';
+    $message = 'Post created successfully';
+    $body = "Market Page";
 }
 
 /* Setting Template Variable, $page_data */
