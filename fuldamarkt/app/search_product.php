@@ -2,7 +2,7 @@
 
 require '../project.php';
 
-//This function should return an array of results. I am not sure how the twig template would handle the array :/
+//This function should return an array of results. 
 function get_product($dbi, $errors, $search_by_data)
 {
     $executed = false;
@@ -49,20 +49,43 @@ $hasError = false;
 if ($request->getMethod() == "POST") {
     $search_by_data = array(
         'text_input' => trim($request->get('text_input')),
-        'category' => trim($request->get('categories')), //should have a default value in the drop down menu
-        'sort_by' => trim($request->get('sort_by'))    //should have a default value in the drop down menu
+        'category' => trim($request->get('categories')), 
+        'sort_by' => trim($request->get('sort_by'))    
     );
 
     
 
 $search_data = get_product($dbi, $errors, $search_by_data); //this is a 2d array with index starting at 0 for first row
+$search_data_pictures = array(); /*array containing multiple entries of (directory:images), the directory is a string containg the location of a posts' images.
+the ['images'] is a subarray containing names of pictures inside the directory */
+
+
+if(isset($search_data)){ //check if there are results to the search query
+    foreach($search_data as $val){ 
+        if(isset($val['picture'])){ //check if a post has a picture directory
+            if(file_exists($_SERVER['DOCUMENT_ROOT'] . $val['picture'])){ 
+                $files = array_diff( scandir( $_SERVER['DOCUMENT_ROOT'] . $val['picture']), array(".", "..") ); //get list of image files found in the post's directory
+                $temp_array = array('directory' => $val['picture'],'images' => $files);  
+                array_push($search_data_pictures, $temp_array);
+            }
+        }
+    }
+unset($val);
 }
+}
+
+// necessary to forward to the twig template so that the "create post" button only appears when a user is logged in
+$check_auth = $session->get('is_authenticated');
+
+
 /* Setting Template Variable, $page_data */
 if(isset($search_data)){
-$page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'message' => $message, 'result' => $search_data];
+$page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'message' => $message, 'result' => $search_data,
+  'search_data_pictures' => $search_data_pictures, 'Doc_root' => $_SERVER['DOCUMENT_ROOT'], 'check_auth' => $check_auth];
 }
 else{
-    $page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'message' => $message];
+    $message = "No Data Found";
+    $page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'message' => $message, 'check_auth' => $check_auth];
 }
 try {
     echo $template->render($temp_name, $page_data);
