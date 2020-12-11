@@ -15,8 +15,6 @@
 
 {% block body %}
     {% if session.get('is_authenticated') %}
-    <h1>{{ page_title }}</h1>
-    {% else %}
-
+    <h1>{{ body }}</h1>
     {% endif %}
 {% endblock %}

@@ -59,8 +59,8 @@ class __TwigTemplate_09efa98b53a3b8ee208e5c9179934065f7ee2aa9a78ab83e8ec2d32d8b5
         // line 6
         echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
         echo "/vendor/components/jqueryui/jquery-ui.min.js\" type=\"text/javascript\"></script>
-
     <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js\" integrity=\"sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==\" crossorigin=\"anonymous\" type=\"text/javascript\"></script>
+
 
     <script type=\"text/javascript\">
         \$(document).ready(function()
@@ -79,22 +79,54 @@ class __TwigTemplate_09efa98b53a3b8ee208e5c9179934065f7ee2aa9a78ab83e8ec2d32d8b5
         echo "    <h1>";
         echo twig_escape_filter($this->env, ($context["body"] ?? null), "html", null, true);
         echo "</h1>
-    <form id=\"loginform\" method=\"post\" action=\"login.php\">
-        <fieldset>
-            <legend>Enter email and password to login.</legend>
-            <div>
-                <label for=\"email\">Email</label>
-                <input id=\"email\" type=\"text\" placeholder=\"Email address\" name=\"email\">
-            </div>
-            <div>
-                <label for=\"password\">Password</label>
-                <input id=\"password\" type=\"password\" placeholder=\"Your password\" name=\"password\">
-            </div>
-            <div>
-                <button type=\"submit\" name=\"submit\">Login</button>
-            </div>
-        </fieldset>
-    </form>
+    <div class=\"limiter\">
+\t\t<div class=\"container-login100\">
+\t\t\t<div class=\"wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50\">
+\t\t\t\t<form class=\"login100-form validate-form\" id=\"loginform\" method=\"post\" action=\"login.php\">
+
+\t\t\t\t\t<span class=\"login100-form-title p-b-33\">
+\t\t\t\t\t\tAccount Login
+\t\t\t\t\t</span>
+\t\t\t\t\t<div class=\"wrap-input100 validate-input\" data-validate = \"Valid email is required: ex@abc.xyz\">
+\t\t\t\t\t\t<input class=\"input100\" id=\"email\" type=\"text\" placeholder=\"Email address\" name=\"email\">
+\t\t\t\t\t\t<span class=\"focus-input100-1\"></span>
+\t\t\t\t\t\t<span class=\"focus-input100-2\"></span>
+\t\t\t\t\t</div>
+\t\t\t\t\t<div class=\"wrap-input100 rs1 validate-input\" data-validate=\"Password is required\">
+\t\t\t\t\t\t<input class=\"input100\" id=\"password\" type=\"password\" placeholder=\"Your password\" name=\"password\">
+\t\t\t\t\t\t<span class=\"focus-input100-1\"></span>
+\t\t\t\t\t\t<span class=\"focus-input100-2\"></span>
+\t\t\t\t\t</div>
+
+\t\t\t\t\t<div class=\"container-login100-form-btn m-t-20\">
+\t\t\t\t\t\t<button class=\"login100-form-btn\" type=\"submit\" name=\"submit\">
+\t\t\t\t\t\t\tSign in
+\t\t\t\t\t\t</button>
+\t\t\t\t\t</div>
+
+\t\t\t\t\t<div class=\"text-center p-t-45 p-b-4\">
+\t\t\t\t\t\t<span class=\"txt1\">
+\t\t\t\t\t\t\tForgot
+\t\t\t\t\t\t</span>
+
+\t\t\t\t\t\t<a href=\"#\" class=\"txt2 hov1\">
+\t\t\t\t\t\t\tUsername / Password?
+\t\t\t\t\t\t</a>
+\t\t\t\t\t</div>
+
+\t\t\t\t\t<div class=\"text-center\">
+\t\t\t\t\t\t<span class=\"txt1\">
+\t\t\t\t\t\t\tDon't have an account yet?
+\t\t\t\t\t\t</span>
+
+\t\t\t\t\t\t<a href=\"signup.php\" class=\"txt2 hov1\">
+\t\t\t\t\t\t\tSign up
+\t\t\t\t\t\t</a>
+\t\t\t\t\t</div>
+\t\t\t\t</form>
+\t\t\t</div>
+\t\t</div>
+\t</div>
     <script type=\"text/javascript\">
         \$(document).ready ( function() {
             \$(\"#loginform\").validate ( {
@@ -109,6 +141,8 @@ class __TwigTemplate_09efa98b53a3b8ee208e5c9179934065f7ee2aa9a78ab83e8ec2d32d8b5
             });
         });
     </script>
+
+\t
 ";
     }
 
@@ -135,8 +169,8 @@ class __TwigTemplate_09efa98b53a3b8ee208e5c9179934065f7ee2aa9a78ab83e8ec2d32d8b5
     <script src=\"{{ path_url }}/vendor/components/jquery/jquery.min.js\" type=\"text/javascript\"></script>
     <link href=\"{{ path_url }}/vendor/components/jqueryui/themes/smoothness/jquery-ui.min.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\"/>
     <script src=\"{{ path_url }}/vendor/components/jqueryui/jquery-ui.min.js\" type=\"text/javascript\"></script>
-
     <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js\" integrity=\"sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==\" crossorigin=\"anonymous\" type=\"text/javascript\"></script>
+
 
     <script type=\"text/javascript\">
         \$(document).ready(function()
@@ -148,22 +182,54 @@ class __TwigTemplate_09efa98b53a3b8ee208e5c9179934065f7ee2aa9a78ab83e8ec2d32d8b5
 
 {% block body %}
     <h1>{{ body }}</h1>
-    <form id=\"loginform\" method=\"post\" action=\"login.php\">
-        <fieldset>
-            <legend>Enter email and password to login.</legend>
-            <div>
-                <label for=\"email\">Email</label>
-                <input id=\"email\" type=\"text\" placeholder=\"Email address\" name=\"email\">
-            </div>
-            <div>
-                <label for=\"password\">Password</label>
-                <input id=\"password\" type=\"password\" placeholder=\"Your password\" name=\"password\">
-            </div>
-            <div>
-                <button type=\"submit\" name=\"submit\">Login</button>
-            </div>
-        </fieldset>
-    </form>
+    <div class=\"limiter\">
+\t\t<div class=\"container-login100\">
+\t\t\t<div class=\"wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50\">
+\t\t\t\t<form class=\"login100-form validate-form\" id=\"loginform\" method=\"post\" action=\"login.php\">
+
+\t\t\t\t\t<span class=\"login100-form-title p-b-33\">
+\t\t\t\t\t\tAccount Login
+\t\t\t\t\t</span>
+\t\t\t\t\t<div class=\"wrap-input100 validate-input\" data-validate = \"Valid email is required: ex@abc.xyz\">
+\t\t\t\t\t\t<input class=\"input100\" id=\"email\" type=\"text\" placeholder=\"Email address\" name=\"email\">
+\t\t\t\t\t\t<span class=\"focus-input100-1\"></span>
+\t\t\t\t\t\t<span class=\"focus-input100-2\"></span>
+\t\t\t\t\t</div>
+\t\t\t\t\t<div class=\"wrap-input100 rs1 validate-input\" data-validate=\"Password is required\">
+\t\t\t\t\t\t<input class=\"input100\" id=\"password\" type=\"password\" placeholder=\"Your password\" name=\"password\">
+\t\t\t\t\t\t<span class=\"focus-input100-1\"></span>
+\t\t\t\t\t\t<span class=\"focus-input100-2\"></span>
+\t\t\t\t\t</div>
+
+\t\t\t\t\t<div class=\"container-login100-form-btn m-t-20\">
+\t\t\t\t\t\t<button class=\"login100-form-btn\" type=\"submit\" name=\"submit\">
+\t\t\t\t\t\t\tSign in
+\t\t\t\t\t\t</button>
+\t\t\t\t\t</div>
+
+\t\t\t\t\t<div class=\"text-center p-t-45 p-b-4\">
+\t\t\t\t\t\t<span class=\"txt1\">
+\t\t\t\t\t\t\tForgot
+\t\t\t\t\t\t</span>
+
+\t\t\t\t\t\t<a href=\"#\" class=\"txt2 hov1\">
+\t\t\t\t\t\t\tUsername / Password?
+\t\t\t\t\t\t</a>
+\t\t\t\t\t</div>
+
+\t\t\t\t\t<div class=\"text-center\">
+\t\t\t\t\t\t<span class=\"txt1\">
+\t\t\t\t\t\t\tDon't have an account yet?
+\t\t\t\t\t\t</span>
+
+\t\t\t\t\t\t<a href=\"signup.php\" class=\"txt2 hov1\">
+\t\t\t\t\t\t\tSign up
+\t\t\t\t\t\t</a>
+\t\t\t\t\t</div>
+\t\t\t\t</form>
+\t\t\t</div>
+\t\t</div>
+\t</div>
     <script type=\"text/javascript\">
         \$(document).ready ( function() {
             \$(\"#loginform\").validate ( {
@@ -178,6 +244,8 @@ class __TwigTemplate_09efa98b53a3b8ee208e5c9179934065f7ee2aa9a78ab83e8ec2d32d8b5
             });
         });
     </script>
+
+\t
 {% endblock %}
 
 ", "login.twig", "/var/www/html/gdsd2020g2/fuldamarkt/template/login.twig");

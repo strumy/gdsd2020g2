@@ -51,10 +51,35 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
         echo twig_source($this->env, "home_style.css");
         echo "</style>
     <link href=\"../template/static/css/style.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\"/>
-    ";
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"";
         // line 8
-        $this->displayBlock('headtags', $context, $blocks);
+        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
+        echo "/vendor/bootstrap/css/bootstrap.min.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"";
         // line 9
+        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
+        echo "/vendor/animate/animate.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"";
+        // line 10
+        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
+        echo "/vendor/animsition/css/animsition.min.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"";
+        // line 11
+        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
+        echo "/vendor/select2/select2.min.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"";
+        // line 12
+        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
+        echo "/css/util.css\">
+\t  <link rel=\"stylesheet\" type=\"text/css\" href=\"";
+        // line 13
+        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
+        echo "/css/main.css\">
+    
+    ";
+        // line 15
+        $this->displayBlock('headtags', $context, $blocks);
+        // line 16
         echo "</head>
 <body class=\"d-flex flex-column min-vh-100\">
     <nav>
@@ -63,31 +88,31 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
       <div class=\"nav-items\">
         <li><a href=\"index.php\">Home</a></li>
         <li><a href=\"#\">Events</a></li>
-        <li><a href=\"#\">Market</a></li>
+        <li><a href=\"search_product.php\">Market</a></li>
         <li><a href=\"#\">About</a></li>
           ";
-        // line 19
-        if (twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "is_authenticated"], "method", false, false, false, 19)) {
-            // line 20
+        // line 26
+        if (twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "is_authenticated"], "method", false, false, false, 26)) {
+            // line 27
             echo "              <li><a href=\"logout.php\">Logout</a></li>
           ";
         } else {
-            // line 22
+            // line 29
             echo "              <li><a href=\"login.php\">Login</a></li>
               <li><a href=\"signup.php\">Signup</a></li>
           ";
         }
-        // line 25
+        // line 32
         echo "
 
       </div>
         ";
-        // line 28
-        if (twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "is_authenticated"], "method", false, false, false, 28)) {
-            // line 29
+        // line 35
+        if (twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "is_authenticated"], "method", false, false, false, 35)) {
+            // line 36
             echo "            <a href=\"userhome.php\" id=\"userhomelink\">";
-            if (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "user_info"], "method", false, false, false, 29), "full_name", [], "any", false, false, false, 29)) {
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "user_info"], "method", false, false, false, 29), "full_name", [], "any", false, false, false, 29), "html", null, true);
+            if (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "user_info"], "method", false, false, false, 36), "full_name", [], "any", false, false, false, 36)) {
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "user_info"], "method", false, false, false, 36), "full_name", [], "any", false, false, false, 36), "html", null, true);
                 echo "'s";
             } else {
                 echo "User";
@@ -95,35 +120,30 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
             echo " Home</a>
         ";
         }
-        // line 31
-        echo "      <div class=\"search-icon\"><span class=\"fas fa-search\"></span></div>
-      <div class=\"cancel-icon\"><span class=\"fas fa-times\"></span></div>
-      <form action=\"#\">
-        <input type=\"search\" class=\"search-data\" placeholder=\"Search\" required>
-        <button type=\"submit\" class=\"fas fa-search\"></button>
-      </form>
+        // line 38
+        echo "      
       <div class=\"profile\"></div>
     </nav>
 
 
     ";
-        // line 41
+        // line 43
         if (($context["message"] ?? null)) {
-            // line 42
+            // line 44
             echo "        <div id=\"reports\">";
             echo twig_escape_filter($this->env, ($context["message"] ?? null), "html", null, true);
             echo "</div>
     ";
         }
-        // line 44
+        // line 46
         echo "    ";
         if (($context["errors"] ?? null)) {
-            // line 45
+            // line 47
             echo "    ";
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable(($context["errors"] ?? null));
             foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-                // line 46
+                // line 48
                 echo "        <div id=\"errors\">";
                 echo twig_escape_filter($this->env, $context["error"], "html", null, true);
                 echo "</div>
@@ -132,49 +152,43 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 48
+            // line 50
             echo "    ";
         }
-        // line 49
+        // line 51
         echo "
     <div id=\"body\" class=\"wrapper flex-grow-1\">";
-        // line 50
+        // line 52
         $this->displayBlock('body', $context, $blocks);
         echo "</div>
     <div id=\"footer\">
         ";
-        // line 52
+        // line 54
         $this->displayBlock('footer', $context, $blocks);
-        // line 55
+        // line 57
         echo "    </div>
 
-    <script>
-    const menuBtn = document.querySelector(\".menu-icon span\");
-    const searchBtn = document.querySelector(\".search-icon\");
-    const cancelBtn = document.querySelector(\".cancel-icon\");
-    const items = document.querySelector(\".nav-items\");
-    const form = document.querySelector(\"form\");
-    menuBtn.onclick = ()=>{
-      items.classList.add(\"active\");
-      menuBtn.classList.add(\"hide\");
-      searchBtn.classList.add(\"hide\");
-      cancelBtn.classList.add(\"show\");
-    }
-    cancelBtn.onclick = ()=>{
-      items.classList.remove(\"active\");
-      menuBtn.classList.remove(\"hide\");
-      searchBtn.classList.remove(\"hide\");
-      cancelBtn.classList.remove(\"show\");
-      form.classList.remove(\"active\");
-      cancelBtn.style.color = \"#ff3d00\";
-    }
-    searchBtn.onclick = ()=>{
-      form.classList.add(\"active\");
-      searchBtn.classList.add(\"hide\");
-      cancelBtn.classList.add(\"show\");
-    }
-  </script>
-
+  
+  <script src=\"";
+        // line 60
+        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
+        echo "/vendor/animsition/js/animsition.min.js\"></script>
+\t<script src=\"";
+        // line 61
+        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
+        echo "/vendor/bootstrap/js/popper.js\"></script>
+\t<script src=\"";
+        // line 62
+        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
+        echo "/vendor/bootstrap/js/bootstrap.min.js\"></script>
+  <script src=\"";
+        // line 63
+        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
+        echo "/vendor/select2/select2.min.js\"></script>
+  <script src=\"";
+        // line 64
+        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
+        echo "/js/main.js\"></script>
   </body>
 </html>
 ";
@@ -187,23 +201,23 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
         echo twig_escape_filter($this->env, ($context["title"] ?? null), "html", null, true);
     }
 
-    // line 8
+    // line 15
     public function block_headtags($context, array $blocks = [])
     {
         $macros = $this->macros;
     }
 
-    // line 50
+    // line 52
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
     }
 
-    // line 52
+    // line 54
     public function block_footer($context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 53
+        // line 55
         echo "            &copy; Copyright 2020 by <a href=\"#\">FuldaMarkt </a>.
         ";
     }
@@ -220,7 +234,7 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
 
     public function getDebugInfo()
     {
-        return array (  207 => 53,  203 => 52,  197 => 50,  191 => 8,  184 => 5,  149 => 55,  147 => 52,  142 => 50,  139 => 49,  136 => 48,  127 => 46,  122 => 45,  119 => 44,  113 => 42,  111 => 41,  99 => 31,  88 => 29,  86 => 28,  81 => 25,  76 => 22,  72 => 20,  70 => 19,  58 => 9,  56 => 8,  51 => 6,  47 => 5,  41 => 1,);
+        return array (  221 => 55,  217 => 54,  211 => 52,  205 => 15,  198 => 5,  190 => 64,  186 => 63,  182 => 62,  178 => 61,  174 => 60,  169 => 57,  167 => 54,  162 => 52,  159 => 51,  156 => 50,  147 => 48,  142 => 47,  139 => 46,  133 => 44,  131 => 43,  124 => 38,  113 => 36,  111 => 35,  106 => 32,  101 => 29,  97 => 27,  95 => 26,  83 => 16,  81 => 15,  76 => 13,  72 => 12,  68 => 11,  64 => 10,  60 => 9,  56 => 8,  51 => 6,  47 => 5,  41 => 1,);
     }
 
     public function getSourceContext()
@@ -232,6 +246,13 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
     <title>{% block title %}{{ title }}{% endblock %}</title>
     <style>{{ source('home_style.css') }}</style>
     <link href=\"../template/static/css/style.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\"/>
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ path_url }}/vendor/bootstrap/css/bootstrap.min.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ path_url }}/vendor/animate/animate.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ path_url }}/vendor/animsition/css/animsition.min.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ path_url }}/vendor/select2/select2.min.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ path_url }}/css/util.css\">
+\t  <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ path_url }}/css/main.css\">
+    
     {% block headtags %}{% endblock %}
 </head>
 <body class=\"d-flex flex-column min-vh-100\">
@@ -241,7 +262,7 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
       <div class=\"nav-items\">
         <li><a href=\"index.php\">Home</a></li>
         <li><a href=\"#\">Events</a></li>
-        <li><a href=\"#\">Market</a></li>
+        <li><a href=\"search_product.php\">Market</a></li>
         <li><a href=\"#\">About</a></li>
           {% if session.get('is_authenticated') %}
               <li><a href=\"logout.php\">Logout</a></li>
@@ -255,12 +276,7 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
         {% if session.get('is_authenticated') %}
             <a href=\"userhome.php\" id=\"userhomelink\">{% if session.get('user_info').full_name %}{{ session.get('user_info').full_name }}'s{% else %}User{% endif %} Home</a>
         {% endif %}
-      <div class=\"search-icon\"><span class=\"fas fa-search\"></span></div>
-      <div class=\"cancel-icon\"><span class=\"fas fa-times\"></span></div>
-      <form action=\"#\">
-        <input type=\"search\" class=\"search-data\" placeholder=\"Search\" required>
-        <button type=\"submit\" class=\"fas fa-search\"></button>
-      </form>
+      
       <div class=\"profile\"></div>
     </nav>
 
@@ -281,33 +297,12 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
         {% endblock %}
     </div>
 
-    <script>
-    const menuBtn = document.querySelector(\".menu-icon span\");
-    const searchBtn = document.querySelector(\".search-icon\");
-    const cancelBtn = document.querySelector(\".cancel-icon\");
-    const items = document.querySelector(\".nav-items\");
-    const form = document.querySelector(\"form\");
-    menuBtn.onclick = ()=>{
-      items.classList.add(\"active\");
-      menuBtn.classList.add(\"hide\");
-      searchBtn.classList.add(\"hide\");
-      cancelBtn.classList.add(\"show\");
-    }
-    cancelBtn.onclick = ()=>{
-      items.classList.remove(\"active\");
-      menuBtn.classList.remove(\"hide\");
-      searchBtn.classList.remove(\"hide\");
-      cancelBtn.classList.remove(\"show\");
-      form.classList.remove(\"active\");
-      cancelBtn.style.color = \"#ff3d00\";
-    }
-    searchBtn.onclick = ()=>{
-      form.classList.add(\"active\");
-      searchBtn.classList.add(\"hide\");
-      cancelBtn.classList.add(\"show\");
-    }
-  </script>
-
+  
+  <script src=\"{{ path_url }}/vendor/animsition/js/animsition.min.js\"></script>
+\t<script src=\"{{ path_url }}/vendor/bootstrap/js/popper.js\"></script>
+\t<script src=\"{{ path_url }}/vendor/bootstrap/js/bootstrap.min.js\"></script>
+  <script src=\"{{ path_url }}/vendor/select2/select2.min.js\"></script>
+  <script src=\"{{ path_url }}/js/main.js\"></script>
   </body>
 </html>
 ", "base.twig", "/var/www/html/gdsd2020g2/fuldamarkt/template/base.twig");
