@@ -46,40 +46,20 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
         // line 5
         $this->displayBlock('title', $context, $blocks);
         echo "</title>
-    <style>";
-        // line 6
-        echo twig_source($this->env, "home_style.css");
-        echo "</style>
+
     <link href=\"../template/static/css/style.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\"/>
-    <link rel=\"stylesheet\" type=\"text/css\" href=\"";
-        // line 8
-        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
-        echo "/vendor/bootstrap/css/bootstrap.min.css\">
-    <link rel=\"stylesheet\" type=\"text/css\" href=\"";
-        // line 9
-        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
-        echo "/vendor/animate/animate.css\">
-    <link rel=\"stylesheet\" type=\"text/css\" href=\"";
-        // line 10
-        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
-        echo "/vendor/animsition/css/animsition.min.css\">
-    <link rel=\"stylesheet\" type=\"text/css\" href=\"";
-        // line 11
-        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
-        echo "/vendor/select2/select2.min.css\">
-    <link rel=\"stylesheet\" type=\"text/css\" href=\"";
-        // line 12
-        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
-        echo "/css/util.css\">
-\t  <link rel=\"stylesheet\" type=\"text/css\" href=\"";
-        // line 13
-        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
-        echo "/css/main.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"../vendor/bootstrap/css/bootstrap.min.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"../vendor/animate/animate.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"../vendor/animsition/css/animsition.min.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"../vendor/select2/select2.min.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"../css/util.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"../css/main.css\">
+    <link href=\"../template/home_style.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\"/>
     
     ";
-        // line 15
-        $this->displayBlock('headtags', $context, $blocks);
         // line 16
+        $this->displayBlock('headtags', $context, $blocks);
+        // line 17
         echo "</head>
 <body class=\"d-flex flex-column min-vh-100\">
     <nav>
@@ -91,28 +71,28 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
         <li><a href=\"search_product.php\">Market</a></li>
         <li><a href=\"#\">About</a></li>
           ";
-        // line 26
-        if (twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "is_authenticated"], "method", false, false, false, 26)) {
-            // line 27
+        // line 27
+        if (twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "is_authenticated"], "method", false, false, false, 27)) {
+            // line 28
             echo "              <li><a href=\"logout.php\">Logout</a></li>
           ";
         } else {
-            // line 29
+            // line 30
             echo "              <li><a href=\"login.php\">Login</a></li>
               <li><a href=\"signup.php\">Signup</a></li>
           ";
         }
-        // line 32
+        // line 33
         echo "
 
       </div>
         ";
-        // line 35
-        if (twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "is_authenticated"], "method", false, false, false, 35)) {
-            // line 36
+        // line 36
+        if (twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "is_authenticated"], "method", false, false, false, 36)) {
+            // line 37
             echo "            <a href=\"userhome.php\" id=\"userhomelink\">";
-            if (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "user_info"], "method", false, false, false, 36), "full_name", [], "any", false, false, false, 36)) {
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "user_info"], "method", false, false, false, 36), "full_name", [], "any", false, false, false, 36), "html", null, true);
+            if (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "user_info"], "method", false, false, false, 37), "full_name", [], "any", false, false, false, 37)) {
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "user_info"], "method", false, false, false, 37), "full_name", [], "any", false, false, false, 37), "html", null, true);
                 echo "'s";
             } else {
                 echo "User";
@@ -120,30 +100,30 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
             echo " Home</a>
         ";
         }
-        // line 38
+        // line 39
         echo "      
       <div class=\"profile\"></div>
     </nav>
 
 
     ";
-        // line 43
+        // line 44
         if (($context["message"] ?? null)) {
-            // line 44
+            // line 45
             echo "        <div id=\"reports\">";
             echo twig_escape_filter($this->env, ($context["message"] ?? null), "html", null, true);
             echo "</div>
     ";
         }
-        // line 46
+        // line 47
         echo "    ";
         if (($context["errors"] ?? null)) {
-            // line 47
+            // line 48
             echo "    ";
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable(($context["errors"] ?? null));
             foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-                // line 48
+                // line 49
                 echo "        <div id=\"errors\">";
                 echo twig_escape_filter($this->env, $context["error"], "html", null, true);
                 echo "</div>
@@ -152,41 +132,41 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 50
+            // line 51
             echo "    ";
         }
-        // line 51
+        // line 52
         echo "
     <div id=\"body\" class=\"wrapper flex-grow-1\">";
-        // line 52
+        // line 53
         $this->displayBlock('body', $context, $blocks);
         echo "</div>
     <div id=\"footer\">
         ";
-        // line 54
+        // line 55
         $this->displayBlock('footer', $context, $blocks);
-        // line 57
+        // line 58
         echo "    </div>
 
   
   <script src=\"";
-        // line 60
+        // line 61
         echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
         echo "/vendor/animsition/js/animsition.min.js\"></script>
 \t<script src=\"";
-        // line 61
+        // line 62
         echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
         echo "/vendor/bootstrap/js/popper.js\"></script>
 \t<script src=\"";
-        // line 62
+        // line 63
         echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
         echo "/vendor/bootstrap/js/bootstrap.min.js\"></script>
   <script src=\"";
-        // line 63
+        // line 64
         echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
         echo "/vendor/select2/select2.min.js\"></script>
   <script src=\"";
-        // line 64
+        // line 65
         echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
         echo "/js/main.js\"></script>
   </body>
@@ -201,23 +181,23 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
         echo twig_escape_filter($this->env, ($context["title"] ?? null), "html", null, true);
     }
 
-    // line 15
+    // line 16
     public function block_headtags($context, array $blocks = [])
     {
         $macros = $this->macros;
     }
 
-    // line 52
+    // line 53
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
     }
 
-    // line 54
+    // line 55
     public function block_footer($context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 55
+        // line 56
         echo "            &copy; Copyright 2020 by <a href=\"#\">FuldaMarkt </a>.
         ";
     }
@@ -234,7 +214,7 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
 
     public function getDebugInfo()
     {
-        return array (  221 => 55,  217 => 54,  211 => 52,  205 => 15,  198 => 5,  190 => 64,  186 => 63,  182 => 62,  178 => 61,  174 => 60,  169 => 57,  167 => 54,  162 => 52,  159 => 51,  156 => 50,  147 => 48,  142 => 47,  139 => 46,  133 => 44,  131 => 43,  124 => 38,  113 => 36,  111 => 35,  106 => 32,  101 => 29,  97 => 27,  95 => 26,  83 => 16,  81 => 15,  76 => 13,  72 => 12,  68 => 11,  64 => 10,  60 => 9,  56 => 8,  51 => 6,  47 => 5,  41 => 1,);
+        return array (  201 => 56,  197 => 55,  191 => 53,  185 => 16,  178 => 5,  170 => 65,  166 => 64,  162 => 63,  158 => 62,  154 => 61,  149 => 58,  147 => 55,  142 => 53,  139 => 52,  136 => 51,  127 => 49,  122 => 48,  119 => 47,  113 => 45,  111 => 44,  104 => 39,  93 => 37,  91 => 36,  86 => 33,  81 => 30,  77 => 28,  75 => 27,  63 => 17,  61 => 16,  47 => 5,  41 => 1,);
     }
 
     public function getSourceContext()
@@ -244,14 +224,15 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
     
 <head>
     <title>{% block title %}{{ title }}{% endblock %}</title>
-    <style>{{ source('home_style.css') }}</style>
+
     <link href=\"../template/static/css/style.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\"/>
-    <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ path_url }}/vendor/bootstrap/css/bootstrap.min.css\">
-    <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ path_url }}/vendor/animate/animate.css\">
-    <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ path_url }}/vendor/animsition/css/animsition.min.css\">
-    <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ path_url }}/vendor/select2/select2.min.css\">
-    <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ path_url }}/css/util.css\">
-\t  <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ path_url }}/css/main.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"../vendor/bootstrap/css/bootstrap.min.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"../vendor/animate/animate.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"../vendor/animsition/css/animsition.min.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"../vendor/select2/select2.min.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"../css/util.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"../css/main.css\">
+    <link href=\"../template/home_style.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\"/>
     
     {% block headtags %}{% endblock %}
 </head>

@@ -3,14 +3,15 @@
     
 <head>
     <title>{% block title %}{{ title }}{% endblock %}</title>
-    <style>{{ source('home_style.css') }}</style>
+
     <link href="../template/static/css/style.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="{{ path_url }}/vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ path_url }}/vendor/animate/animate.css">
-    <link rel="stylesheet" type="text/css" href="{{ path_url }}/vendor/animsition/css/animsition.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ path_url }}/vendor/select2/select2.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ path_url }}/css/util.css">
-	  <link rel="stylesheet" type="text/css" href="{{ path_url }}/css/main.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/util.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link href="../template/home_style.css" rel="stylesheet" type="text/css" media="screen"/>
     
     {% block headtags %}{% endblock %}
 </head>

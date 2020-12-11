@@ -43,7 +43,7 @@ $path_url = (
     strlen($path_root) ?
         ("/" . $path_root) : ''
     ) .
-    '/fuldamarkt/';
+    '/fuldamarkt';
 
 $host = "localhost";
 $db_name = "fuldamarkt_proddb";
