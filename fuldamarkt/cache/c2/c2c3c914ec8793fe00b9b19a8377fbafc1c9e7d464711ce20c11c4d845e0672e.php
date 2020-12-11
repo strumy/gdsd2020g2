@@ -149,26 +149,11 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
         echo "    </div>
 
   
-  <script src=\"";
-        // line 61
-        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
-        echo "/vendor/animsition/js/animsition.min.js\"></script>
-\t<script src=\"";
-        // line 62
-        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
-        echo "/vendor/bootstrap/js/popper.js\"></script>
-\t<script src=\"";
-        // line 63
-        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
-        echo "/vendor/bootstrap/js/bootstrap.min.js\"></script>
-  <script src=\"";
-        // line 64
-        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
-        echo "/vendor/select2/select2.min.js\"></script>
-  <script src=\"";
-        // line 65
-        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
-        echo "/js/main.js\"></script>
+  <script src=\"../vendor/animsition/js/animsition.min.js\"></script>
+\t<script src=\"../vendor/bootstrap/js/popper.js\"></script>
+\t<script src=\"../vendor/bootstrap/js/bootstrap.min.js\"></script>
+  <script src=\"../vendor/select2/select2.min.js\"></script>
+  <script src=\"../js/main.js\"></script>
   </body>
 </html>
 ";
@@ -214,7 +199,7 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
 
     public function getDebugInfo()
     {
-        return array (  201 => 56,  197 => 55,  191 => 53,  185 => 16,  178 => 5,  170 => 65,  166 => 64,  162 => 63,  158 => 62,  154 => 61,  149 => 58,  147 => 55,  142 => 53,  139 => 52,  136 => 51,  127 => 49,  122 => 48,  119 => 47,  113 => 45,  111 => 44,  104 => 39,  93 => 37,  91 => 36,  86 => 33,  81 => 30,  77 => 28,  75 => 27,  63 => 17,  61 => 16,  47 => 5,  41 => 1,);
+        return array (  186 => 56,  182 => 55,  176 => 53,  170 => 16,  163 => 5,  149 => 58,  147 => 55,  142 => 53,  139 => 52,  136 => 51,  127 => 49,  122 => 48,  119 => 47,  113 => 45,  111 => 44,  104 => 39,  93 => 37,  91 => 36,  86 => 33,  81 => 30,  77 => 28,  75 => 27,  63 => 17,  61 => 16,  47 => 5,  41 => 1,);
     }
 
     public function getSourceContext()
@@ -279,11 +264,11 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
     </div>
 
   
-  <script src=\"{{ path_url }}/vendor/animsition/js/animsition.min.js\"></script>
-\t<script src=\"{{ path_url }}/vendor/bootstrap/js/popper.js\"></script>
-\t<script src=\"{{ path_url }}/vendor/bootstrap/js/bootstrap.min.js\"></script>
-  <script src=\"{{ path_url }}/vendor/select2/select2.min.js\"></script>
-  <script src=\"{{ path_url }}/js/main.js\"></script>
+  <script src=\"../vendor/animsition/js/animsition.min.js\"></script>
+\t<script src=\"../vendor/bootstrap/js/popper.js\"></script>
+\t<script src=\"../vendor/bootstrap/js/bootstrap.min.js\"></script>
+  <script src=\"../vendor/select2/select2.min.js\"></script>
+  <script src=\"../js/main.js\"></script>
   </body>
 </html>
 ", "base.twig", "/var/www/html/gdsd2020g2/fuldamarkt/template/base.twig");
