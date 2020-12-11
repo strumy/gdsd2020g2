@@ -48,34 +48,19 @@ class __TwigTemplate_f81b61612396652c10fe28e7c2ed1bd622c781384d802ab5e9a690541c8
     {
         $macros = $this->macros;
         // line 4
-        echo "    <script src=\"";
-        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
-        echo "/vendor/components/jquery/jquery.min.js\" type=\"text/javascript\"></script>
-    <link href=\"";
-        // line 5
-        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
-        echo "/vendor/components/jqueryui/themes/smoothness/jquery-ui.min.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\"/>
-    <script src=\"";
-        // line 6
-        echo twig_escape_filter($this->env, ($context["path_url"] ?? null), "html", null, true);
-        echo "/vendor/components/jqueryui/jquery-ui.min.js\" type=\"text/javascript\"></script>
-
-    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js\" integrity=\"sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==\" crossorigin=\"anonymous\" type=\"text/javascript\"></script>
-
-    <script type=\"text/javascript\">
-        \$(document).ready(function()
-        {
+        echo "    <script type=\"text/javascript\">
+        \$(document).ready(function() {
             \$(\"#errors\").hide();
         });
     </script>
 ";
     }
 
-    // line 18
+    // line 11
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 19
+        // line 12
         echo "    <p>";
         echo twig_escape_filter($this->env, ($context["body"] ?? null), "html", null, true);
         echo "</p>
@@ -222,7 +207,7 @@ class __TwigTemplate_f81b61612396652c10fe28e7c2ed1bd622c781384d802ab5e9a690541c8
 
     public function getDebugInfo()
     {
-        return array (  79 => 19,  75 => 18,  60 => 6,  56 => 5,  51 => 4,  47 => 3,  36 => 1,);
+        return array (  64 => 12,  60 => 11,  51 => 4,  47 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -230,15 +215,8 @@ class __TwigTemplate_f81b61612396652c10fe28e7c2ed1bd622c781384d802ab5e9a690541c8
         return new Source("{% extends \"base.twig\" %}
 
 {% block headtags %}
-    <script src=\"{{ path_url }}/vendor/components/jquery/jquery.min.js\" type=\"text/javascript\"></script>
-    <link href=\"{{ path_url }}/vendor/components/jqueryui/themes/smoothness/jquery-ui.min.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\"/>
-    <script src=\"{{ path_url }}/vendor/components/jqueryui/jquery-ui.min.js\" type=\"text/javascript\"></script>
-
-    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js\" integrity=\"sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==\" crossorigin=\"anonymous\" type=\"text/javascript\"></script>
-
     <script type=\"text/javascript\">
-        \$(document).ready(function()
-        {
+        \$(document).ready(function() {
             \$(\"#errors\").hide();
         });
     </script>

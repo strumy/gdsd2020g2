@@ -55,11 +55,15 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
     <link rel=\"stylesheet\" type=\"text/css\" href=\"../css/util.css\">
     <link rel=\"stylesheet\" type=\"text/css\" href=\"../css/main.css\">
     <link href=\"../template/home_style.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\"/>
-    
+
+    <script src=\"https://code.jquery.com/jquery-1.12.4.min.js\" type=\"text/javascript\"></script>
+    <link href=\"https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\"/>
+    <script src=\"https://code.jquery.com/ui/1.12.1/jquery-ui.min.js\" type=\"text/javascript\"></script>
+    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js\" integrity=\"sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==\" crossorigin=\"anonymous\" type=\"text/javascript\"></script>
     ";
-        // line 16
+        // line 20
         $this->displayBlock('headtags', $context, $blocks);
-        // line 17
+        // line 21
         echo "</head>
 <body class=\"d-flex flex-column min-vh-100\">
     <nav>
@@ -71,28 +75,28 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
         <li><a href=\"search_product.php\">Market</a></li>
         <li><a href=\"#\">About</a></li>
           ";
-        // line 27
-        if (twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "is_authenticated"], "method", false, false, false, 27)) {
-            // line 28
+        // line 31
+        if (twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "is_authenticated"], "method", false, false, false, 31)) {
+            // line 32
             echo "              <li><a href=\"logout.php\">Logout</a></li>
           ";
         } else {
-            // line 30
+            // line 34
             echo "              <li><a href=\"login.php\">Login</a></li>
               <li><a href=\"signup.php\">Signup</a></li>
           ";
         }
-        // line 33
+        // line 37
         echo "
 
       </div>
         ";
-        // line 36
-        if (twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "is_authenticated"], "method", false, false, false, 36)) {
-            // line 37
+        // line 40
+        if (twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "is_authenticated"], "method", false, false, false, 40)) {
+            // line 41
             echo "            <a href=\"userhome.php\" id=\"userhomelink\">";
-            if (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "user_info"], "method", false, false, false, 37), "full_name", [], "any", false, false, false, 37)) {
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "user_info"], "method", false, false, false, 37), "full_name", [], "any", false, false, false, 37), "html", null, true);
+            if (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "user_info"], "method", false, false, false, 41), "full_name", [], "any", false, false, false, 41)) {
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["session"] ?? null), "get", [0 => "user_info"], "method", false, false, false, 41), "full_name", [], "any", false, false, false, 41), "html", null, true);
                 echo "'s";
             } else {
                 echo "User";
@@ -100,30 +104,30 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
             echo " Home</a>
         ";
         }
-        // line 39
+        // line 43
         echo "      
       <div class=\"profile\"></div>
     </nav>
 
 
     ";
-        // line 44
+        // line 48
         if (($context["message"] ?? null)) {
-            // line 45
+            // line 49
             echo "        <div id=\"reports\">";
             echo twig_escape_filter($this->env, ($context["message"] ?? null), "html", null, true);
             echo "</div>
     ";
         }
-        // line 47
+        // line 51
         echo "    ";
         if (($context["errors"] ?? null)) {
-            // line 48
+            // line 52
             echo "    ";
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable(($context["errors"] ?? null));
             foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-                // line 49
+                // line 53
                 echo "        <div id=\"errors\">";
                 echo twig_escape_filter($this->env, $context["error"], "html", null, true);
                 echo "</div>
@@ -132,20 +136,20 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 51
+            // line 55
             echo "    ";
         }
-        // line 52
+        // line 56
         echo "
     <div id=\"body\" class=\"wrapper flex-grow-1\">";
-        // line 53
+        // line 57
         $this->displayBlock('body', $context, $blocks);
         echo "</div>
     <div id=\"footer\">
         ";
-        // line 55
+        // line 59
         $this->displayBlock('footer', $context, $blocks);
-        // line 58
+        // line 62
         echo "    </div>
 
   
@@ -166,23 +170,23 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
         echo twig_escape_filter($this->env, ($context["title"] ?? null), "html", null, true);
     }
 
-    // line 16
+    // line 20
     public function block_headtags($context, array $blocks = [])
     {
         $macros = $this->macros;
     }
 
-    // line 53
+    // line 57
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
     }
 
-    // line 55
+    // line 59
     public function block_footer($context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 56
+        // line 60
         echo "            &copy; Copyright 2020 by <a href=\"#\">FuldaMarkt </a>.
         ";
     }
@@ -199,7 +203,7 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
 
     public function getDebugInfo()
     {
-        return array (  186 => 56,  182 => 55,  176 => 53,  170 => 16,  163 => 5,  149 => 58,  147 => 55,  142 => 53,  139 => 52,  136 => 51,  127 => 49,  122 => 48,  119 => 47,  113 => 45,  111 => 44,  104 => 39,  93 => 37,  91 => 36,  86 => 33,  81 => 30,  77 => 28,  75 => 27,  63 => 17,  61 => 16,  47 => 5,  41 => 1,);
+        return array (  190 => 60,  186 => 59,  180 => 57,  174 => 20,  167 => 5,  153 => 62,  151 => 59,  146 => 57,  143 => 56,  140 => 55,  131 => 53,  126 => 52,  123 => 51,  117 => 49,  115 => 48,  108 => 43,  97 => 41,  95 => 40,  90 => 37,  85 => 34,  81 => 32,  79 => 31,  67 => 21,  65 => 20,  47 => 5,  41 => 1,);
     }
 
     public function getSourceContext()
@@ -218,7 +222,11 @@ class __TwigTemplate_0f2c07abda0ad55b0f76b805f529ce2927538f0dd2d03661ec8572012b7
     <link rel=\"stylesheet\" type=\"text/css\" href=\"../css/util.css\">
     <link rel=\"stylesheet\" type=\"text/css\" href=\"../css/main.css\">
     <link href=\"../template/home_style.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\"/>
-    
+
+    <script src=\"https://code.jquery.com/jquery-1.12.4.min.js\" type=\"text/javascript\"></script>
+    <link href=\"https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\"/>
+    <script src=\"https://code.jquery.com/ui/1.12.1/jquery-ui.min.js\" type=\"text/javascript\"></script>
+    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js\" integrity=\"sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==\" crossorigin=\"anonymous\" type=\"text/javascript\"></script>
     {% block headtags %}{% endblock %}
 </head>
 <body class=\"d-flex flex-column min-vh-100\">
