@@ -1,7 +1,7 @@
 <?php
 
 require_once 'vendor/autoload.php';
-require_once 'app/functions.php';
+require_once 'functions.php';
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -51,8 +51,8 @@ $dbuser = "root";
 $dbpass = "root";
 
 try {
-    $loader = new Twig\Loader\FilesystemLoader('../template');
-    $template = new Twig\Environment($loader, ['cache' => '../cache','debug' => 'true']);
+    $loader = new Twig\Loader\FilesystemLoader('template');
+    $template = new Twig\Environment($loader, ['cache' => 'cache','debug' => 'true']);
 
     /* Create Request Variable*/
     $request = Request::createFromGlobals();

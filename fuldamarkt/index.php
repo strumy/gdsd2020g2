@@ -1,6 +1,6 @@
 <?php
 
-require '../project.php';
+require 'project.php';
 
 $page_data = ['title' => 'Home', 'body' => 'Welcome to FuldaMarkt'];
 

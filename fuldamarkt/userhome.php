@@ -1,6 +1,6 @@
 <?php
 
-require '../project.php';
+require 'project.php';
 
 $template_name = 'user_home.twig';
 $title = 'User Home';

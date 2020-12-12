@@ -1,6 +1,6 @@
 <?php
 
-require '../project.php';
+require 'project.php';
 
 $temp_name = 'login.twig';
 $title = 'Login';
