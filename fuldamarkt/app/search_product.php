@@ -18,7 +18,7 @@ function get_product($dbi, $errors, $search_by_data)
         }
          
     mysqli_select_db($dbi, 'fuldamarkt_proddb');    
-    $sql_query = "SELECT * FROM MARKET_TABLE WHERE TITLE LIKE '%$text_input%' AND market_category='$category' ORDER BY $sort_by ASC LIMIT 10;";
+    $sql_query = "SELECT * FROM MARKET_TABLE WHERE TITLE LIKE '%$text_input%' AND market_category LIKE '%$category%' ORDER BY $sort_by ASC LIMIT 10;";
     
 
     try {
