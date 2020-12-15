@@ -4,7 +4,7 @@ require 'project.php';
 
 $temp_name = 'signup.twig';
 $title = 'Signup';
-$body = 'Signup Here';
+$body = 'Signup';
 $message = '';
 $hasError = false;
 

@@ -13,11 +13,14 @@ try {
 	    $user_data = $session->get('user_info');
 	    $user = getUser($db, $errors, $user_data);
 
-	    if($user == false){
-		$message = "Userhome cannot be loaded. Please contact administrator";
+	    if($user == false) {
+		    $message = "Userhome cannot be loaded. Please contact administrator";
 	    } else {
-		$body = "User Home";
-
+	        if ($user['utype'] == 'ADMIN') {
+                $title = "Admin User Home";
+            } else {
+                $title = "User Home";
+            }
 	    }
     } else $message = "Sorry! This page can not be viewed without logging in. Please Login.";
 } catch (\Exception $ex) {

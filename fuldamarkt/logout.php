@@ -2,8 +2,8 @@
 
 require 'project.php';
 
-$temp_name = 'index.twig';
-$title = 'FuldaMarkt Home';
+$temp_name = 'login.twig';
+$title = 'Login';
 $body = '';
 $message = '';
 

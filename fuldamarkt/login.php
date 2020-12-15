@@ -36,7 +36,12 @@ if ($request->getMethod() == "POST") {
 
             $temp_name = 'user_home.twig';
             $message = 'Login successful!';
-            $body = "User's Home";
+
+            if ($user['utype'] == 'ADMIN') {
+                $title = "Admin User Home";
+            } else {
+                $title = "User Home";
+            }
         }
         else {
             $message = "Login Failed! Either user email or password is incorrect. Try again.";
