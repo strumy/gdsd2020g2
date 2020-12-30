@@ -40,7 +40,7 @@ function get_product($dbi, $errors, $search_by_data)
 
 $temp_name = 'market.twig';
 $title = 'Market Page';
-$body = 'Search for items';
+$body = '';
 $errors = '';
 $message = '';
 $hasError = false;
@@ -81,11 +81,11 @@ $check_auth = $session->get('is_authenticated');
 /* Setting Template Variable, $page_data */
 if(isset($search_data)){
 $page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'message' => $message, 'result' => $search_data,
-  'search_data_pictures' => $search_data_pictures, 'Doc_root' => $_SERVER['DOCUMENT_ROOT'], 'check_auth' => $check_auth];
+  'search_data_pictures' => $search_data_pictures, 'Doc_root' => $_SERVER['DOCUMENT_ROOT'], 'check_auth' => $check_auth, 'session' => $session];
 }
 else{
-    $message = "No Data Found";
-    $page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'message' => $message, 'check_auth' => $check_auth];
+    //$message = "No Data Found";
+    $page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'message' => $message, 'check_auth' => $check_auth, 'session' => $session];
 }
 try {
     echo $template->render($temp_name, $page_data);

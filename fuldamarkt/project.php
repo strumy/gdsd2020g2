@@ -59,7 +59,12 @@ try {
 
     /*Set DB Connection*/
     $db = new \FluentPDO(new \PDO('mysql:host=' . $host . ';dbname=' . $db_name, $dbuser, $dbpass));
-    $db->debug = false;
+    //$db->debug = true;
+    /*$db->debug = function($BaseQuery) {
+        echo "query: " . $BaseQuery->getQuery(false) . "<br/>";
+        echo "parameters: " . implode(', ', $BaseQuery->getParameters()) . "<br/>";
+        echo "rowCount: " . $BaseQuery->getResult()->rowCount() . "<br/>";
+    };*/
 
     /* Start Session */
     $session = new Session();

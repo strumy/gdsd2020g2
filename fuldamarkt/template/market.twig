@@ -81,7 +81,7 @@
                 
                 <p class="product-description">{{ r['text_body']}}</p>
                 <p>Status: {{ r['Status']}}</p>
-                <button>Contact Seller</button>
+                <a class="button-post" href="{% if session.get('is_authenticated') %}message.php?post_id={{ r['post_id'] }}&author_id={{ r['author_id'] }} {% else %} login.php?m=m{% endif %}">Contact Seller</a>
                 <p class="product-price">{{ r['Price']}}&euro;</p>
             </li>
         </ul>

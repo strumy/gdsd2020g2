@@ -14,7 +14,50 @@
 {% endblock %}
 
 {% block body %}
+
     {% if session.get('is_authenticated') %}
-        <h2>{{ title }}</h2>
+        <!-- Page Content -->
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-12">
+
+                    <div class="card mb-2 mt-1">
+                        <div class="card-body bg-light text-dark">
+                            <h2 class="card-title p-1">Inbox</h2>
+                        </div>
+                    </div>
+                    {% for message in data.inboxmessages %}
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h2 class="card-title h5">Message from {{ message.full_name }}</h2>
+                            <p class="card-text">{{ message.body }}</p>
+                            <a href="{% if session.get('is_authenticated') %}message.php?post_id={{ message.id_product }}&author_id={{ message.id_sender }} {% else %} login.php?m=m{% endif %}" class="btn btn-primary">Reply</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="card mb-2 mt-1">
+                        <div class="card-body bg-light text-dark">
+                            <h2 class="card-title p-1">Sent Messages</h2>
+                        </div>
+                    </div>
+                    {% for message in data.sentmessages %}
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h2 class="card-title h5">Message to {{ message.full_name }}</h2>
+                                <p class="card-text">{{ message.body }}</p>
+                                <a href="{% if session.get('is_authenticated') %}message.php?post_id={{ message.id_product }}&author_id={{ message.id_receiver }} {% else %} login.php?m=m{% endif %}" class="btn btn-primary">Reply</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- /.col-lg-9 -->
+
+            </div>
+
+        </div>
+        <!-- /.container -->
+
     {% endif %}
 {% endblock %}
