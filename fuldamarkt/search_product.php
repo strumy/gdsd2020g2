@@ -124,7 +124,7 @@ $page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'message' 
   'search_data_pictures' => $search_data_pictures, 'Doc_root' => $_SERVER['DOCUMENT_ROOT'], 'check_auth' => $check_auth, 'session' => $session];
 }
 else{
-    //$page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'message' => $message, 'check_auth' => $check_auth, 'session' => $session];
+    $page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'message' => $message, 'check_auth' => $check_auth, 'session' => $session];
 }
 try {
     echo $template->render($temp_name, $page_data);
