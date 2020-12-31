@@ -29,15 +29,12 @@
                         <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Events</a>
-                     </li>
-                     <li class="nav-item">
                         <a class="nav-link" href="search_product.php">Market</a>
                      </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                     </li>
                      {% if session.get('is_authenticated') %}
+                     <li class="nav-item">
+                        <a class="nav-link" href="userhome.php">User's dashboard</a>
+                     </li>
                      <li class="nav-item">
                         <a class="nav-link" href="logout.php">Logout</a>
                      </li>

@@ -1,0 +1,59 @@
+{% extends "base.twig" %}
+
+{% block headtags %}
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplemde/1.11.2/simplemde.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplemde/1.11.2/simplemde.min.js"></script>-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if ($("#errors").html() == '') {
+                $("#errors").hide();
+            }
+            //var simplemde = new SimpleMDE({ element: $("#body")[0] });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+                <form class="login100-form validate-form" id="messageform" method="post" action="message.php">
+					<span class="login100-form-title p-b-33">
+                        Send Message to <a href="#">{{ receiver.full_name }}</a> for the posted product, <a href="#">{{ product.title }}</a>
+					</span>
+                    <input type="hidden" value="{{ receiver.id }}" name="id_receiver"/>
+                    <input type="hidden" value="{{ product.post_id }}" name="id_product"/>
+                    <input type="hidden" value="{{ session.get('user_info').id }}" name="id_sender"/>
+                    <div class="wrap-input100 validate-input">
+                        <textarea class="input100" id="body" placeholder="Type your message..." rows="10" name="body">{{ message.body |trim }}</textarea>
+                        <span class="focus-input100-1"></span>
+                        <span class="focus-input100-2"></span>
+                    </div>
+                    <div>Sender: {{ session.get('user_info').full_name }}</div>
+                    <div class="container-login100-form-btn m-t-20">
+                        <button class="login100-form-btn" type="submit" name="submit">
+                            Send
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready ( function() {
+            $("#messageform").validate ( {
+                rules:{
+                    body:{ required: true, maxlength: 500 }
+                },
+                messages: {
+                    body: {
+                        required: "Message can not be empty.",
+                        maxlength: "Message can't be longer than 500 characters."
+                    }
+                }
+            });
+        });
+    </script>
+
+
+{% endblock %}

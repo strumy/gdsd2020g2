@@ -37,11 +37,9 @@ if ($request->getMethod() == "POST") {
             $temp_name = 'user_home.twig';
             $message = 'Login successful!';
 
-            if ($user['utype'] == 'ADMIN') {
-                $title = "Admin User Home";
-            } else {
-                $title = "User Home";
-            }
+            $data = setUserHomeData($db, $errors, $session, $user, $request);
+            $title = $data['title'];
+            $body = $data['body'];
         }
         else {
             $message = "Login Failed! Either user email or password is incorrect. Try again.";
@@ -49,7 +47,7 @@ if ($request->getMethod() == "POST") {
     }
 }
 
-$page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'message' => $message, 'path_url' => $path_url, 'session' => $session];
+$page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'message' => $message, 'path_url' => $path_url, 'session' => $session, 'data' => $data];
 
 try {
     echo $template->render($temp_name, $page_data);

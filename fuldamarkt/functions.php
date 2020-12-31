@@ -1,5 +1,6 @@
 <?php
 
+/* Table: users */
 function addUser(&$db, &$errors, $user_data = array())
 {
     $executed = false;
@@ -69,6 +70,32 @@ function getUser(&$db, &$errors, $user_data)
     return $query;
 }
 
+function getAllUsers(&$db, &$errors)
+{
+    try {
+        $query = $db->from("users");
+    } catch (\Exception $ex) {
+        $errors[] = "Get User Error: " . $ex->getMessage();
+        return false;
+    }
+
+    return $query;
+}
+
+function getUserById(&$db, &$errors, $user_id)
+{
+    try {
+        $query = $db->from("users")
+            ->where(array("id" => $user_id))
+            ->fetch();
+    } catch (\Exception $ex) {
+        $errors[] = "Get User By Id Error: " . $ex->getMessage();
+        return false;
+    }
+
+    return $query;
+}
+
 function authenticateUser($user, $user_data)
 {
     if ($user) {
@@ -83,6 +110,174 @@ function authenticateUser($user, $user_data)
     return false;
 }
 
+/* Table: MARKET_TABLE */
+function getProductById(&$db, &$errors, $product_id) {
+    try {
+        $query = $db->from("MARKET_TABLE")
+            ->where(array("post_id" => $product_id))
+            ->fetch();
+    } catch (\Exception $ex) {
+        $errors[] = "Get Product By Id Error: " . $ex->getMessage();
+        return false;
+    }
+
+    return $query;
+}
+
+function getAllProducts($db, $errors)
+{
+    try {
+        $query = $db->from("MARKET_TABLE");
+    } catch (\Exception $ex) {
+        $errors[] = "Get Product By Id Error: " . $ex->getMessage();
+        return false;
+    }
+
+    return $query;
+}
+
+/* Table: messages */
+function sendMessage(&$db, &$errors, $message_data = array())
+{
+    $executed = false;
+
+    if (empty($message_data)) {
+        return $executed;
+    }
+
+    $message_data['date_inserted'] = new \FluentLiteral('NOW()');
+
+    try {
+        $query = $db->insertInto('messages')->values($message_data);
+        $executed = $query->execute(true);
+    } catch (\Exception $ex) {
+        $errors[] = "Add Message Error: " . $ex->getMessage();
+    }
+    return $executed;
+}
+
+function getAllIncomingMessages(&$db, &$errors, $user)
+{
+    try {
+        $query = $db->from("messages")->leftJoin('users ON users.id = messages.id_sender')->select('users.full_name')
+            ->leftJoin('MARKET_TABLE ON MARKET_TABLE.post_id = messages.id_product')->select('MARKET_TABLE.author_id')
+            ->where("id_receiver", $user['id']);
+
+    } catch (\Exception $ex) {
+        $errors[] = "Error: " . $ex->getMessage();
+        return false;
+    }
+
+    return $query;
+}
+
+function getAllOutgoingMessages(&$db, &$errors, $user)
+{
+    try {
+        $query = $db->from("messages")->leftJoin('users ON users.id = messages.id_receiver')->select('users.full_name')
+            ->leftJoin('MARKET_TABLE ON MARKET_TABLE.post_id = messages.id_product')->select('MARKET_TABLE.author_id')
+            ->where("id_sender", $user['id']);
+
+    } catch (\Exception $ex) {
+        $errors[] = "Error: " . $ex->getMessage();
+        return false;
+    }
+
+    return $query;
+}
+
+function setUserHomeData(&$db, &$errors, &$session, &$user, &$request){
+    if ($user['utype'] == 'ADMIN') {
+        $title = "Admin Home";
+    } else {
+        $title = "User Home";
+    }
+
+    if ($request->getMethod() == "GET") {
+        $data['section'] = trim($request->get('section'));
+        $data['action'] = trim($request->get('action'));
+        $data['uid'] = trim($request->get('uid'));
+        $data['utype'] = trim($request->get('utype'));
+        $data['ustatus'] = trim($request->get('ustatus'));
+    }
+
+    $inbox_messages = getAllIncomingMessages($db, $errors, $session->get('user_info')['id']);
+    $sent_messages = getAllOutgoingMessages($db, $errors, $session->get('user_info')['id']);
+
+    if($user['utype'] == 'ADMIN') {
+        if (isset($data['action']) && isset($data['uid']) && isset($data['utype'])) {
+
+            if($data['action'] == 'makeadmintoggle'){
+                toggleAdmin($db, $errors, $data['uid'], $data['utype']);
+            }
+        }
+        if (isset($data['action']) && isset($data['uid']) && isset($data['ustatus'])) {
+            if($data['action'] == 'ustatus'){
+                toggleStatus($db, $errors, $data['uid'], $data['ustatus']);
+            }
+        }
+
+        if (isset($data['section']) && $data['section'] == 'users'){
+            $userlist = getAllUsers($db, $errors);
+            $data['userlist'] = $userlist;
+        }
+    }
+
+    $data['inboxmessages'] = $inbox_messages;
+    $data['sentmessages'] = $sent_messages;
+    $data['title'] = $title;
+    $data['body'] = "Welcome! " .$user['full_name'] ." You are logged in as " . ucwords($user['utype']);
+
+    return $data;
+}
+
+function toggleAdmin(&$db, &$errors, $uid, $utype)
+{
+    if (!isset($utype) || !isset($uid)) {
+        return false;
+    }
+
+    if($utype != 'ADMIN') {
+        $state = 'ADMIN';
+    } else {
+        $state = 'STUDENT';
+    }
+
+    try {
+        $query = $db->update('users', array('date_updated' => new \FluentLiteral('NOW()'), 'utype' => $state), $uid);
+        $executed = $query->execute(true);
+    } catch (\Exception $ex) {
+        $errors[] = "Error: " . $ex->getMessage();
+        return false;
+    }
+
+    return $executed;
+}
+
+function toggleStatus(&$db, &$errors, $uid, $ustatus)
+{
+    if (!isset($ustatus) || !isset($uid)) {
+        return false;
+    }
+
+    if($ustatus == 1) {
+        $state = 0;
+    } else {
+        $state = 1;
+    }
+
+    try {
+        $query = $db->update('users', array('date_updated' => new \FluentLiteral('NOW()'), 'ustatus' => $state), $uid);
+        $executed = $query->execute(true);
+    } catch (\Exception $ex) {
+        $errors[] = "Error: " . $ex->getMessage();
+        return false;
+    }
+
+    return $executed;
+}
+
+/* Clears Session */
 function clearSession(&$session)
 {
     if (!$session->get('is_authenticated')) {

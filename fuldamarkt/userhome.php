@@ -16,18 +16,17 @@ try {
 	    if($user == false) {
 		    $message = "Userhome cannot be loaded. Please contact administrator";
 	    } else {
-	        if ($user['utype'] == 'ADMIN') {
-                $title = "Admin User Home";
-            } else {
-                $title = "User Home";
-            }
+            $data = setUserHomeData($db, $errors, $session, $user, $request);
+            $title = $data['title'];
+            $body = $data['body'];
 	    }
     } else $message = "Sorry! This page can not be viewed without logging in. Please Login.";
 } catch (\Exception $ex) {
 	$errors[] = "Error: " . $ex->getMessage();
 }
 
-$page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'message' => $message, 'path_url' => $path_url, 'session' => $session];
+$page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'message' => $message, 'path_url' => $path_url, 'session' => $session,
+    'data' => $data ];
 
 try {
     echo $template->render($template_name, $page_data);

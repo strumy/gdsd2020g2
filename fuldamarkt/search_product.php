@@ -2,7 +2,7 @@
 
 require 'project.php';
 
-//This function should return an associative array of results. 
+//This function should return an associative array of results.
 function get_product($dbi, $errors, $search_by_data)
 {
     $executed = false;
@@ -16,7 +16,7 @@ function get_product($dbi, $errors, $search_by_data)
             return 1;
         }
     }
-    
+
     //check database connection
     if(!$dbi ){
         die('Could not connect: ' . mysqli_error());
@@ -24,26 +24,26 @@ function get_product($dbi, $errors, $search_by_data)
         return $executed;
         }
          
-    mysqli_select_db($dbi, 'fuldamarkt_proddb'); 
+    mysqli_select_db($dbi, 'fuldamarkt_proddb');
 
 
     // check sorting to see whether to sort by ascending or descending order for price and date sorting
     if(strpos($sort_by,"ascending") !== false){
         if(strpos($sort_by,"Price") !== false){
-            $sort_by = "Price"; //formating 
+            $sort_by = "Price"; //formating
         }
         if(strpos($sort_by,"date") !== false){
             $sort_by = "date_inserted";
-        }  
+        }
         $sql_query = "SELECT * FROM MARKET_TABLE WHERE STATUS='available' AND TITLE LIKE '%$text_input%' AND market_category LIKE '%$category%' ORDER BY $sort_by ASC;";
     }
-    else if(strpos($sort_by,"descending") !== false){ 
+    else if(strpos($sort_by,"descending") !== false){
         if(strpos($sort_by,"Price") !== false){
             $sort_by = "Price";
         }
         if(strpos($sort_by,"date") !== false){
             $sort_by = "date_inserted";
-        }   
+        }
         $sql_query = "SELECT * FROM MARKET_TABLE WHERE STATUS='available' AND TITLE LIKE '%$text_input%' AND market_category LIKE '%$category%' ORDER BY $sort_by DESC;";
     }
     else{
@@ -71,7 +71,7 @@ function get_product($dbi, $errors, $search_by_data)
 
 $temp_name = 'market.twig';
 $title = 'Market Page';
-$body = '';
+$body = 'Search for items';
 $errors = '';
 $message = '';
 $search_data = array();
@@ -94,11 +94,11 @@ $search_data = get_product($dbi, $errors, $search_by_data); //this is a 2d array
 
 if($search_data != 1){
     if(!empty($search_data)){ //check if there are results to the search query
-        foreach($search_data as $val){ 
+        foreach($search_data as $val){
            if(isset($val['picture'])){ //check if a post has a picture directory
-              if(file_exists($_SERVER['DOCUMENT_ROOT'] . $val['picture'])){ 
+              if(file_exists($_SERVER['DOCUMENT_ROOT'] . $val['picture'])){
                   $files = array_diff( scandir( $_SERVER['DOCUMENT_ROOT'] . $val['picture']), array(".", "..") ); //get list of image files found in the post's directory
-                  $temp_array = array('directory' => $val['picture'],'images' => $files);  
+                  $temp_array = array('directory' => $val['picture'],'images' => $files);
                   array_push($search_data_pictures, $temp_array);
               }
             }
@@ -111,7 +111,7 @@ if($search_data != 1){
 }
 else{
 $message = "Search input needs to be alphanumeric and less than 40 characters";
-}    
+}
 }
 
 // necessary to forward to the twig template so that the "create post" button only appears when a user is logged in
@@ -123,8 +123,8 @@ if(!empty($search_data)){
 $page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'message' => $message, 'result' => $search_data,
   'search_data_pictures' => $search_data_pictures, 'Doc_root' => $_SERVER['DOCUMENT_ROOT'], 'check_auth' => $check_auth, 'session' => $session];
 }
-else{   
-    $page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'message' => $message, 'check_auth' => $check_auth, 'session' => $session];
+else{
+    //$page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'message' => $message, 'check_auth' => $check_auth, 'session' => $session];
 }
 try {
     echo $template->render($temp_name, $page_data);
