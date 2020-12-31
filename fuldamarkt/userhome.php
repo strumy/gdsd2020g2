@@ -16,8 +16,9 @@ try {
 	    if($user == false) {
 		    $message = "Userhome cannot be loaded. Please contact administrator";
 	    } else {
-            $data = setUserHomeData($db, $session, $user);
+            $data = setUserHomeData($db, $errors, $session, $user, $request);
             $title = $data['title'];
+            $body = $data['body'];
 	    }
     } else $message = "Sorry! This page can not be viewed without logging in. Please Login.";
 } catch (\Exception $ex) {

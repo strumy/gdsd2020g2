@@ -20,9 +20,75 @@
         <div class="container">
 
             <div class="row">
+                <div class="col-lg-3">
+                    <h2 class="my-4">{{ title }}</h2>
+                    <div class="list-group">
+                        <a href="userhome.php?section=dashboard" class="list-group-item {% if data.section == null or data.section == 'dashboard' %}active{% endif %}">Dashboard</a>
+                        {% if session.get('user_info').utype == 'ADMIN' %}
+                        <a href="userhome.php?section=users" class="list-group-item {% if data.section == 'users' %}active{% endif %}">Users</a>
+                        {% endif %}
+                        <a href="userhome.php?section=messages" class="list-group-item {% if data.section == 'messages' %}active{% endif %}">Messages</a>
+                    </div>
+                </div>
+                {% if data.section == null or data.section == 'dashboard' %}
+                <div class="col-lg-9">
+                    <h3 class="my-4">{{ body }}</h3>
+                    <div class="card mb-2 mt-1">
+                        <div class="card-body bg-light text-dark">
+                            <h2 class="card-title p-1">Dashboard</h2>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if data.section == 'users' and session.get('user_info').utype == 'ADMIN' %}
+                    <div class="col-lg-9">
+                        <div class="card mb-2 mt-1">
+                            <div class="card-body bg-light text-dark">
+                                <h2 class="card-title p-1">Users</h2>
+                            </div>
+                        </div>
 
-                <div class="col-lg-12">
-
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Username</th>
+                                <th>User Type</th>
+                                <th>Gender</th>
+                                <th>User Status</th>
+                                <th>Last Login Date</th>
+                                <th>Date Inserted</th>
+                                <th>Date Updated</th>
+                                <th>Toggle Admin/Normal User</th>
+                                <th>Enable/Disable</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in data.userlist %}
+                            <tr>
+                                <th>{{ user.id }}</th>
+                                <td>{{ user.full_name }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.user_name }}</td>
+                                <td>{{ user.utype }}</td>
+                                <td>{{ user.gender }}</td>
+                                <td>{% if user.ustatus == 1 %}Enabled{% elseif user.ustatus == 0 %}Disabled{% elseif user.ustatus == 2 %}Deleted{% endif %}</td>
+                                <td>{{ user.date_lastlogin }}</td>
+                                <td>{{ user.date_inserted }}</td>
+                                <td>{{ user.date_updated }}</td>
+                                <td>{% if user.utype != "ADMIN" %}<a href="userhome.php?section=users&action=makeadmintoggle&uid={{ user.id }}&utype={{ user.utype }}">Make Admin</a>{% else %}<a href="userhome.php?section=users&action=makeadmintoggle&uid={{ user.id }}&utype={{ user.utype }}">Make Normal User</a>{% endif %}</td>
+                                <td>{% if user.ustatus == 1 %}<a href="userhome.php?section=users&action=ustatus&uid={{ user.id }}&ustatus={{ user.ustatus }}">Disable</a> {% else %}<a href="userhome.php?section=users&action=ustatus&uid={{ user.id }}&ustatus={{ user.ustatus }}">Enable</a>{% endif %}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% endif %}
+                {% if data.section == 'messages' %}
+                <div class="col-lg-9">
+                    <h3 class="my-4">{{ body }}</h3>
                     <div class="card mb-2 mt-1">
                         <div class="card-body bg-light text-dark">
                             <h2 class="card-title p-1">Inbox</h2>
@@ -52,8 +118,7 @@
                         </div>
                     {% endfor %}
                 </div>
-                <!-- /.col-lg-9 -->
-
+                {% endif %}
             </div>
 
         </div>

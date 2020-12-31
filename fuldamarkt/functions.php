@@ -70,6 +70,18 @@ function getUser(&$db, &$errors, $user_data)
     return $query;
 }
 
+function getAllUsers(&$db, &$errors)
+{
+    try {
+        $query = $db->from("users");
+    } catch (\Exception $ex) {
+        $errors[] = "Get User Error: " . $ex->getMessage();
+        return false;
+    }
+
+    return $query;
+}
+
 function getUserById(&$db, &$errors, $user_id)
 {
     try {
@@ -174,21 +186,95 @@ function getAllOutgoingMessages(&$db, &$errors, $user)
     return $query;
 }
 
-function setUserHomeData(&$db, &$session, &$user){
+function setUserHomeData(&$db, &$errors, &$session, &$user, &$request){
     if ($user['utype'] == 'ADMIN') {
-        $title = "Admin User Home";
+        $title = "Admin Home";
     } else {
         $title = "User Home";
+    }
+
+    if ($request->getMethod() == "GET") {
+        $data['section'] = trim($request->get('section'));
+        $data['action'] = trim($request->get('action'));
+        $data['uid'] = trim($request->get('uid'));
+        $data['utype'] = trim($request->get('utype'));
+        $data['ustatus'] = trim($request->get('ustatus'));
     }
 
     $inbox_messages = getAllIncomingMessages($db, $errors, $session->get('user_info')['id']);
     $sent_messages = getAllOutgoingMessages($db, $errors, $session->get('user_info')['id']);
 
+    if($user['utype'] == 'ADMIN') {
+        if (isset($data['action']) && isset($data['uid']) && isset($data['utype'])) {
+
+            if($data['action'] == 'makeadmintoggle'){
+                toggleAdmin($db, $errors, $data['uid'], $data['utype']);
+            }
+        }
+        if (isset($data['action']) && isset($data['uid']) && isset($data['ustatus'])) {
+            if($data['action'] == 'ustatus'){
+                toggleStatus($db, $errors, $data['uid'], $data['ustatus']);
+            }
+        }
+
+        if (isset($data['section']) && $data['section'] == 'users'){
+            $userlist = getAllUsers($db, $errors);
+            $data['userlist'] = $userlist;
+        }
+    }
+
     $data['inboxmessages'] = $inbox_messages;
     $data['sentmessages'] = $sent_messages;
     $data['title'] = $title;
+    $data['body'] = "Welcome! " .$user['full_name'] ." You are logged in as " . ucwords($user['utype']);
 
     return $data;
+}
+
+function toggleAdmin(&$db, &$errors, $uid, $utype)
+{
+    if (!isset($utype) || !isset($uid)) {
+        return false;
+    }
+
+    if($utype != 'ADMIN') {
+        $state = 'ADMIN';
+    } else {
+        $state = 'STUDENT';
+    }
+
+    try {
+        $query = $db->update('users', array('date_updated' => new \FluentLiteral('NOW()'), 'utype' => $state), $uid);
+        $executed = $query->execute(true);
+    } catch (\Exception $ex) {
+        $errors[] = "Error: " . $ex->getMessage();
+        return false;
+    }
+
+    return $executed;
+}
+
+function toggleStatus(&$db, &$errors, $uid, $ustatus)
+{
+    if (!isset($ustatus) || !isset($uid)) {
+        return false;
+    }
+
+    if($ustatus == 1) {
+        $state = 0;
+    } else {
+        $state = 1;
+    }
+
+    try {
+        $query = $db->update('users', array('date_updated' => new \FluentLiteral('NOW()'), 'ustatus' => $state), $uid);
+        $executed = $query->execute(true);
+    } catch (\Exception $ex) {
+        $errors[] = "Error: " . $ex->getMessage();
+        return false;
+    }
+
+    return $executed;
 }
 
 /* Clears Session */

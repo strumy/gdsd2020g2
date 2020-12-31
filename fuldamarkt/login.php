@@ -37,8 +37,9 @@ if ($request->getMethod() == "POST") {
             $temp_name = 'user_home.twig';
             $message = 'Login successful!';
 
-            $data = setUserHomeData($db, $session, $user);
+            $data = setUserHomeData($db, $errors, $session, $user, $request);
             $title = $data['title'];
+            $body = $data['body'];
         }
         else {
             $message = "Login Failed! Either user email or password is incorrect. Try again.";
