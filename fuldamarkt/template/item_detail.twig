@@ -32,7 +32,7 @@
 									class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
 									<!-- Background of PhotoSwipe. 
-																																																																																																																																																																																																																																																																																																																																																																																         It's a separate element, as animating opacity is faster than rgba(). -->
+																																																																																																																																																																																																																																																																																																																																																																																																																				         It's a separate element, as animating opacity is faster than rgba(). -->
 									<div class="pswp__bg"></div>
 
 									<!-- Slides wrapper with overflow:hidden. -->
@@ -149,9 +149,9 @@
 							</div>
 							<hr>
 
-							<button type="button" class="btn btn-primary btn-md mr-1 mb-2 waves-effect waves-light">Contact Seller</button>
-							<button type="button" class="btn btn-light btn-md mr-1 mb-2 waves-effect waves-light">
-								<i class="fas fa-shopping-cart pr-2"></i>Add to wishlist</button>
+							<a class="btn btn-primary btn-md mr-1 mb-2 waves-effect waves-light" href="{% if session.get('is_authenticated') %}message.php?post_id={{ product.post_id}}&author_id={{ product.author_id}} {% else %} login.php?m=m{% endif %}" role="button">Contact Seller</a>
+							<a class="btn btn-light btn-md mr-1 mb-2 waves-effect waves-light" href="#" role="button">Add to Wishlist</a>
+
 						</div>
 					</div>
 
