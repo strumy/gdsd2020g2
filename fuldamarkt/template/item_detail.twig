@@ -1,0 +1,183 @@
+{% extends "base.twig" %}
+{% block headtags %}
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta
+	http-equiv="x-ua-compatible" content="ie=edge">
+
+	<!-- Material Design Bootstrap -->
+	<link rel="stylesheet" href="static/css/mdb-pro.min.css">
+
+{% endblock %}
+
+{% block body %}
+	<!--Main layout-->
+
+	{% if product is defined %}
+		<main>
+			<div
+				class="container">
+
+				<!--Section: Block Content-->
+				<section class="mb-5">
+
+					<div class="row">
+						<div class="col-md-6 mb-4 mb-md-0">
+
+							<div
+								id="mdb-lightbox-ui">
+								<!-- Root element of PhotoSwipe. -->
+								<div
+									class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+									<!-- Background of PhotoSwipe. 
+																																																																																																																																																																																																																																																																																																																																																																																         It's a separate element, as animating opacity is faster than rgba(). -->
+									<div class="pswp__bg"></div>
+
+									<!-- Slides wrapper with overflow:hidden. -->
+									<div class="pswp__scroll-wrap">
+
+										<!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
+										<!-- don't modify these 3 pswp__item elements, data is added later on. -->
+											<div class="pswp__container"> <div class="pswp__item"></div>
+											<div class="pswp__item"></div>
+											<div class="pswp__item"></div>
+										</div>
+
+										<!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+										<div class="pswp__ui pswp__ui--hidden">
+
+											<div
+												class="pswp__top-bar">
+
+												<!--  Controls are self-explanatory. Order can be changed. -->
+
+												<div class="pswp__counter"></div>
+
+												<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+												<!--<button class="pswp__button pswp__button--share" title="Share"></button>-->
+
+												<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+												<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+												<!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+												<!-- element will get class pswp__preloader--active when preloader is running -->
+												<div class="pswp__preloader">
+													<div class="pswp__preloader__icn">
+														<div class="pswp__preloader__cut">
+															<div class="pswp__preloader__donut"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+											<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+											<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+											<div class="pswp__caption">
+												<div class="pswp__caption__center"></div>
+											</div>
+
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+
+							<div class="mdb-lightbox" data-pswp-uid="1">
+
+								<div class="row product-gallery mx-1">
+									<div class="col-12 mb-0">
+										{% for p in product_pictures %}
+											{% for p2 in p['images'] %}
+												<figure class="view overlay rounded z-depth-1 main-img" {{ loop.index == 1 ? 'style="max-height: 450px"' : 'style="display: none"'}}>
+													<a href={{ "#{p['directory'] ~ p2}" }} data-size="710x823">
+														<img src={{ "#{p['directory'] ~ p2}" }} class="img-fluid z-depth-1">
+													</a>
+												</figure>
+											{% endfor %}
+										{% endfor %}
+									</div>
+									<div class="col-12">
+										<div class="row">
+											{% for p in product_pictures %}
+												{% for p2 in p['images'] %}
+													<div class="col-3">
+														<div class="view overlay rounded z-depth-1 gallery-item hoverable">
+															<img src={{ "#{p['directory'] ~ p2}" }} class="img-fluid">
+															<div class="mask rgba-white-slight"></div>
+														</div>
+													</div>
+												{% endfor %}
+											{% endfor %}
+
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+						<div class="col-md-6">
+
+							<h5>{{product.title}}</h5>
+							<p class="mb-2 text-muted text-uppercase small">{{product.market_category}}</p>
+
+							<p>
+								<span class="mr-1">
+									<strong>${{product.Price}}</strong>
+								</span>
+							</p>
+							<p class="pt-1">{{product.text_body}}</p>
+							<div class="table-responsive">
+								<table class="table table-sm table-borderless mb-0">
+									<tbody>
+										<tr>
+											<th class="pl-0 w-25" scope="row">
+												<strong>Status</strong>
+											</th>
+											<td>{{product.Status}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<hr>
+
+							<button type="button" class="btn btn-primary btn-md mr-1 mb-2 waves-effect waves-light">Contact Seller</button>
+							<button type="button" class="btn btn-light btn-md mr-1 mb-2 waves-effect waves-light">
+								<i class="fas fa-shopping-cart pr-2"></i>Add to wishlist</button>
+						</div>
+					</div>
+
+				</section>
+				<!--Section: Block Content-->
+
+				<hr>
+
+
+			</div>
+		</main>
+	{% endif %}
+
+	<!--Main layout-->
+	<!-- MDB core JavaScript -->
+	<script type="text/javascript" src="static/js/mdb.min.js.download"></script>
+	<!-- MDB Ecommerce JavaScript -->
+	<script type="text/javascript" src="static/js/mdb.ecommerce.min.js.download"></script>
+	<script>
+		$(document).ready(function () { // MDB Lightbox Init
+$(function () {
+$("#mdb-lightbox-ui").load("../../../mdb-addons/mdb-lightbox-ui.html");
+});
+});
+	</script>
+
+
+	<div class="hiddendiv common"></div>
+{% endblock %}

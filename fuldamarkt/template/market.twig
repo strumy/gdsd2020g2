@@ -71,14 +71,11 @@
                 <a href="#" class="product-photo">
                 {% for p in search_data_pictures %}
                     {% if p['directory'] == r['picture'] %}
-                        {# {% for p2 in p['images'] %}
-                            <img src={{ "#{p['directory'] ~ p2}" }}  height="130">
-                        {% endfor %}  #}
-                        <img src={{ "#{p['directory'] ~ p['images']|first}" }}  height="130">
+          						<a href="item_detail.php?post_id={{ r['post_id'] }}&author_id={{ r['author_id'] }}" class="product-photo">
                     {% endif %}
                 {% endfor %} 
                 </a>
-                <h2><a href="#">{{ r['title']}}</a></h2>
+                <a href="item_detail.php?post_id={{ r['post_id'] }}&author_id={{ r['author_id'] }}">{{ r['title']}}</a>
                 <a href="#" class="product-compare">{{ r['date_inserted']}}</a>
                 <h3><a href="#">{{ r['market_category']}}</a></h2>
                 
