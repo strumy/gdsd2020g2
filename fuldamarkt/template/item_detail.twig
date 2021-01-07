@@ -20,7 +20,7 @@
 				class="container">
 
 				<!--Section: Block Content-->
-				<section class="mb-5">
+				<section class="mb-5  my-5">
 
 					<div class="row">
 						<div class="col-md-6 mb-4 mb-md-0">
@@ -32,7 +32,7 @@
 									class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
 									<!-- Background of PhotoSwipe. 
-																																																																																																																																																																																																																																																																																																																																																																																																																				         It's a separate element, as animating opacity is faster than rgba(). -->
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				         It's a separate element, as animating opacity is faster than rgba(). -->
 									<div class="pswp__bg"></div>
 
 									<!-- Slides wrapper with overflow:hidden. -->
@@ -159,10 +159,61 @@
 				<!--Section: Block Content-->
 
 				<hr>
+				{% if related_items is defined %}
+					<h4 class="text-center my-5">
+						<strong>Related Items</strong>
+					</h4>
+
+					<!--Section: Block Content-->
+					<section
+						class="text-center">
+
+						<!-- Grid row -->
+						<div class="row">
+							{% for item in related_items %}
+								<!-- Grid column -->
+								<div
+									class="col-md-6 col-lg-3 mb-5">
+
+									<!-- Card -->
+									<div class="">
+
+										<div class="view zoom overlay z-depth-2 rounded">
+											<img class="img-fluid w-100" src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg" alt="Sample">
+											<a href="item_detail.php?post_id={{ item.post_id }}&author_id={{ item.author_id }}">
+												<div class="mask">
+													<img class="img-fluid w-100" src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg">
+													<div class="mask rgba-black-slight"></div>
+												</div>
+											</a>
+										</div>
+
+										<div class="pt-4">
+											<h5>
+												<a href="item_detail.php?post_id={{ item.post_id }}&author_id={{ item.author_id }}">{{ item.title}}</a>
+											</h5>
+											<h6>{{item.Price}}</h6>
+										</div>
+
+									</div>
+									<!-- Card -->
+
+								</div>
+								<!-- Grid column -->
+							{% endfor %}
+
+
+						</div>
+						<!-- Grid row -->
+
+					</section>
+					<!--Section: Block Content-->
+				{% endif %}
 
 
 			</div>
 		</main>
+
 	{% endif %}
 
 	<!--Main layout-->

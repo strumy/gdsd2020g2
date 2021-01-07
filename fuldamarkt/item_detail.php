@@ -17,6 +17,7 @@ if ($request->getMethod() == "GET") {
 
     $receiver = getUserById($db, $errors, $data['author_id']);
     $product = getProductById($db, $errors, $data['post_id']);
+    $related_products = getSimilarCategoryItems($db,$errors,$product['market_category'],$product['post_id']);
 
     $val = $product;
 
@@ -31,7 +32,8 @@ if ($request->getMethod() == "GET") {
 }
 
 $page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'path_url' => $path_url, 'message' => $message,
-    'session' => $session, 'data' => $data, 'receiver' => $receiver, 'product' => $product,'product_pictures' => $product_pictures];
+    'session' => $session, 'data' => $data, 'receiver' => $receiver, 'product' => $product,'product_pictures' => $product_pictures,
+'related_items' =>$related_products];
 
 try {
     echo $template->render($temp_name, $page_data);

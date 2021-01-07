@@ -106,7 +106,6 @@ function authenticateUser($user, $user_data)
             return false;
         }
     }
-
     return false;
 }
 
@@ -120,6 +119,19 @@ function getProductById(&$db, &$errors, $product_id) {
         $errors[] = "Get Product By Id Error: " . $ex->getMessage();
         return false;
     }
+
+    return $query;
+}
+function getSimilarCategoryItems(&$db, &$errors, $category, $post_id) {
+    try {
+        $query = $db->from("MARKET_TABLE")
+        ->where("market_category", $category)
+        ->where("post_id != ?", $post_id);
+    } catch (\Exception $ex) {
+        $errors[] = "Get Product By Category Error: " . $ex->getMessage();
+        return false;
+    }
+    //print_r($query);
 
     return $query;
 }
