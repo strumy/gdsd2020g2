@@ -32,7 +32,7 @@
 									class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
 									<!-- Background of PhotoSwipe. 
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				         It's a separate element, as animating opacity is faster than rgba(). -->
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																								         It's a separate element, as animating opacity is faster than rgba(). -->
 									<div class="pswp__bg"></div>
 
 									<!-- Slides wrapper with overflow:hidden. -->
@@ -179,10 +179,16 @@
 									<div class="">
 
 										<div class="view zoom overlay z-depth-2 rounded">
-											<img class="img-fluid w-100" src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg" alt="Sample">
+											{% set filePath = '' %}
+											{% for p in related_pictures %}
+												{% if p['directory'] == item['picture'] %}
+													{% set filePath = "#{p['directory'] ~ p['images']|first}"%}
+												{% endif %}
+											{% endfor %}
+											<img class="img-fluid w-100" src={{filePath}} alt="Sample">
 											<a href="item_detail.php?post_id={{ item.post_id }}&author_id={{ item.author_id }}">
 												<div class="mask">
-													<img class="img-fluid w-100" src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg">
+													<img class="img-fluid w-100" src={{filePath}}>
 													<div class="mask rgba-black-slight"></div>
 												</div>
 											</a>

@@ -8,6 +8,8 @@ $body = '';
 $message = '';
 
 $product_pictures = array();
+$related_pictures = array();
+
 if ($request->getMethod() == "GET") {
     $data = array(
         'post_id' => trim($request->get('post_id')),
@@ -29,11 +31,22 @@ if ($request->getMethod() == "GET") {
         }
     }
     unset($val);
+    
+        foreach($related_products as $val){
+           if(isset($val['picture'])){ //check if a post has a picture directory
+              if(file_exists($_SERVER['DOCUMENT_ROOT'] . $val['picture'])){
+                  $files = array_diff( scandir( $_SERVER['DOCUMENT_ROOT'] . $val['picture']), array(".", "..") ); //get list of image files found in the post's directory
+                  $temp_array = array('directory' => $val['picture'],'images' => $files);
+                  array_push($related_pictures, $temp_array);
+              }
+            }
+        }
+    unset($val);
 }
 
 $page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'path_url' => $path_url, 'message' => $message,
     'session' => $session, 'data' => $data, 'receiver' => $receiver, 'product' => $product,'product_pictures' => $product_pictures,
-'related_items' =>$related_products];
+'related_items' =>$related_products,'related_pictures' => $related_pictures];
 
 try {
     echo $template->render($temp_name, $page_data);
