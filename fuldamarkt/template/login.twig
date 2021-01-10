@@ -1,15 +1,23 @@
 {% extends "base.twig" %}
 
 {% block headtags %}
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#errors").hide();
-        });
-    </script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta
+	http-equiv="x-ua-compatible" content="ie=edge">
+
+	<!-- Material Design Bootstrap -->
+	<link rel="stylesheet" href="static/css/mdb-pro.min.css">
+	<script type="text/javascript">
+		$(document).ready(function () {
+$("#errors").hide();
+});
+	</script>
 {% endblock %}
 
 {% block body %}
-    <div class="limiter">
+	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
 				<form class="login100-form validate-form" id="loginform" method="post" action="login.php">
@@ -17,7 +25,7 @@
 					<span class="login100-form-title p-b-33">
 						Login
 					</span>
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+					<div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
 						<input class="input100" id="email" type="text" placeholder="Email address" name="email">
 						<span class="focus-input100-1"></span>
 						<span class="focus-input100-2"></span>
@@ -47,21 +55,28 @@
 			</div>
 		</div>
 	</div>
-    <script type="text/javascript">
-        $(document).ready ( function() {
-            $("#loginform").validate ( {
-                rules:{
-                    email:{ required: true },
-                    password:{ required: true }
-                },
-                messages: {
-                    email: { required: "Enter email." },
-                    password: { required: "Enter password." }
-                }
-            });
-        });
-    </script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+$("#loginform").validate({
+rules: {
+email: {
+required: true
+},
+password: {
+required: true
+}
+},
+messages: {
+email: {
+required: "Enter email."
+},
+password: {
+required: "Enter password."
+}
+}
+});
+});
+	</script>
 
-	
+
 {% endblock %}
-
