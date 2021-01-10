@@ -1,7 +1,7 @@
 {% extends "base.twig" %}
 
 {% block headtags %}
-	
+
 	<script type="text/javascript">
 		$(document).ready(function () {
 $("#errors").hide();
@@ -12,7 +12,7 @@ $("#errors").hide();
 {% block body %}
 	<div class="limiter">
 		<div class="container-login100">
-			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50 text-center">
 				<form class="login100-form validate-form" id="loginform" method="post" action="login.php">
 
 					<span class="login100-form-title p-b-33">
@@ -29,11 +29,9 @@ $("#errors").hide();
 						<span class="focus-input100-2"></span>
 					</div>
 
-					<div class="container-login100-form-btn m-t-20">
-						<button class="login100-form-btn" type="submit" name="submit">
-							Sign in
-						</button>
-					</div>
+					<button class="btn btn-primary btn-md waves-effect waves-light" type="submit" name="submit" style="width: 50%; margin-top: 15">
+						Sign in
+					</button>
 
 					<div class="text-center">
 						<span class="txt1">

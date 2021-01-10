@@ -16,7 +16,7 @@
 {% block body %}
     <div class="limiter">
         <div class="container-login100">
-            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50 text-center">
                 <form class="login100-form validate-form" id="messageform" method="post" action="message.php">
 					<span class="login100-form-title p-b-33">
                         Send Message to <a href="#">{{ receiver.full_name }}</a> for the posted product, <a href="#">{{ product.title }}</a>
@@ -30,11 +30,10 @@
                         <span class="focus-input100-2"></span>
                     </div>
                     <div>Sender: {{ session.get('user_info').full_name }}</div>
-                    <div class="container-login100-form-btn m-t-20">
-                        <button class="login100-form-btn" type="submit" name="submit">
-                            Send
-                        </button>
-                    </div>
+
+                    <button class="btn btn-primary btn-md waves-effect waves-light" type="submit" name="submit" style="width: 50%; margin-top: 15">
+						Send
+					</button>
                 </form>
             </div>
         </div>
