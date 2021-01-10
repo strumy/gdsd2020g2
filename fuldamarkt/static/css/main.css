@@ -328,7 +328,15 @@ input.input100 {
   display: flex;
   flex-wrap: wrap;
 }
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:after,
+.btn-primary:visited {
+  background-color: #63c76a !important;
 
+  border-color: #63c76a !important;
+}
 .login100-form-btn {
   display: -webkit-box;
   display: -webkit-flex;
@@ -625,6 +633,7 @@ input.input100 {
   border: 0;
   cursor: pointer;
   background: #63c76a;
+  border-color: #fff;
   transition: all 0.2s ease-out, color 0.2s ease-out;
 }
 
@@ -718,8 +727,7 @@ input.input100 {
   grid-template-columns: auto auto auto;
   list-style: none;
   margin: 0 auto;
-  max-width: 1200px;
-  width: 100%;
+  max-width: 300px;
   text-align: center;
   padding: 0;
 }
