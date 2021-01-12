@@ -91,6 +91,14 @@
                 <p class="product-description">{{ r['text_body']}}</p>
                 <p>Status: {{ r['Status']}}</p>
                 <a class="btn btn-primary btn-md mr-1 mb-2 waves-effect waves-light" href="{% if session.get('is_authenticated') %}message.php?post_id={{ r['post_id'] }}&author_id={{ r['author_id'] }} {% else %} login.php?m=m{% endif %}">Contact Seller</a>
+                    {% if session.get('is_authenticated') and session.get('user_info').utype == 'ADMIN' %}
+                        {% if r['Status'] == 'pending' %}
+                            <a class="btn btn-info btn-md mr-1 mb-2 waves-effect waves-light" href="product.php?post_id={{ r['post_id'] }}&op=enable">Enable</a>
+                        {% elseif r['Status'] == 'available' %}
+                            <a class="btn btn-warning btn-md mr-1 mb-2 waves-effect waves-light" href="product.php?post_id={{ r['post_id'] }}&op=disable">Disable</a>
+                        {% endif %}
+
+                    {% endif %}
                 <p class="product-price">{{ r['Price']}}&euro;</p>
             </li>
         </ul>
