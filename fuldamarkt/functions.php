@@ -126,7 +126,8 @@ function getSimilarCategoryItems(&$db, &$errors, $category, $post_id) {
     try {
         $query = $db->from("MARKET_TABLE")
         ->where("market_category", $category)
-        ->where("post_id != ?", $post_id);
+        ->where("post_id != ?", $post_id)
+        ->where("Status = ?", 'available');
     } catch (\Exception $ex) {
         $errors[] = "Get Product By Category Error: " . $ex->getMessage();
         return false;
