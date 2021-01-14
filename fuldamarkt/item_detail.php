@@ -42,11 +42,16 @@ if ($request->getMethod() == "GET") {
             }
         }
     unset($val);
+///Checking if item is in wishlist - AA
+    $user_info = $session->get('user_info');
+    $user_idn = $user_info['id'];
+    $errors = '';
+    $isinWishlist = checkIfItemInWishlist($dbi, $errors, $data['post_id'], $user_idn);
 }
 
 $page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'path_url' => $path_url, 'message' => $message,
     'session' => $session, 'data' => $data, 'receiver' => $receiver, 'product' => $product,'product_pictures' => $product_pictures,
-'related_items' =>$related_products,'related_pictures' => $related_pictures];
+'related_items' =>$related_products,'related_pictures' => $related_pictures, 'isinWishlist' => $isinWishlist];
 
 try {
     echo $template->render($temp_name, $page_data);
