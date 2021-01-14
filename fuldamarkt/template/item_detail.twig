@@ -139,7 +139,11 @@
 							<hr>
 
 							<a class="btn btn-primary btn-md mr-1 mb-2 waves-effect waves-light" href="{% if session.get('is_authenticated') %}message.php?post_id={{ product.post_id}}&author_id={{ product.author_id}} {% else %} login.php?m=m{% endif %}" role="button">Contact Seller</a>
-							<a class="btn btn-light btn-md mr-1 mb-2 waves-effect waves-light" href="#" role="button">Add to Wishlist</a>
+							{% if not isinWishlist %}
+							<a class="btn btn-light btn-md mr-1 mb-2 waves-effect waves-light" href="{% if session.get('is_authenticated') %}add_to_wishlist.php?post_id={{ product.post_id}} {% else %} login.php?m=m{% endif %}" role="button">Add to Wishlist</a>
+							{% else %}
+							<a class="btn btn-light btn-md mr-1 mb-2 waves-effect waves-light" href="{% if session.get('is_authenticated') %}remove_from_wishlist.php?post_id={{ product.post_id}} {% else %} login.php?m=m{% endif %}" role="button">Remove From Wishlist</a>
+							{% endif %}
 
 						</div>
 					</div>
