@@ -137,6 +137,25 @@ function getSimilarCategoryItems(&$db, &$errors, $category, $post_id) {
     return $query;
 }
 
+function checkIfItemInWishlist(&$dbi, &$errors, $post_id, $user_id){
+    $executed = false;
+    $sql_query = "SELECT EXISTS (SELECT * FROM  `WISHLIST_TABLE` WHERE market_post_id=$post_id AND wishlist_by=$user_id) AS inWishlist;";
+    try{
+        $query_result = mysqli_query($dbi, $sql_query);
+    }
+    catch (\Exception $ex) {
+        $errors[] = "Insert query failed: " . $ex->getMessage();
+    
+        return $executed;
+    }
+    $query_result_assoc = $query_result->fetch_all(MYSQLI_ASSOC);
+    $query_result_final = $query_result_assoc[0];
+    $isinWishlist = $query_result_final['inWishlist'];
+    return $isinWishlist;
+
+
+}
+
 function getAllProducts($db, $errors)
 {
     try {
