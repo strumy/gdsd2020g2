@@ -43,10 +43,16 @@ if ($request->getMethod() == "GET") {
         }
     unset($val);
 ///Checking if item is in wishlist - AA
+    $check_auth = $session->get('is_authenticated');
+    if($check_auth){
     $user_info = $session->get('user_info');
     $user_idn = $user_info['id'];
     $errors = '';
     $isinWishlist = checkIfItemInWishlist($dbi, $errors, $data['post_id'], $user_idn);
+    }
+    else{
+        $isinWishlist = false; //default value
+    }
 }
 
 $page_data = ['title' => $title, 'body' => $body, 'errors'=> $errors, 'path_url' => $path_url, 'message' => $message,
