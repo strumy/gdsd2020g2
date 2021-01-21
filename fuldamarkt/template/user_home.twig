@@ -23,25 +23,56 @@
                 <div class="col-lg-3">
                     <h2 class="my-4">{{ title }}</h2>
                     <div class="list-group">
-                        <a href="userhome.php?section=dashboard" class="list-group-item {% if data.section == null or data.section == 'dashboard' %}active{% endif %}">Dashboard</a>
+                        <a href="userhome.php?section=products" class="list-group-item {% if data.section == null or data.section == 'products' %}active{% endif %}">Products</a>
                         {% if session.get('user_info').utype == 'ADMIN' %}
                         <a href="userhome.php?section=users" class="list-group-item {% if data.section == 'users' %}active{% endif %}">Users</a>
                         {% endif %}
                         <a href="userhome.php?section=messages" class="list-group-item {% if data.section == 'messages' %}active{% endif %}">Messages</a>
                     </div>
                 </div>
-                {% if data.section == null or data.section == 'dashboard' %}
+                {% if (data.section == null or data.section == 'products') and session.get('user_info').utype == 'ADMIN' %}
                 <div class="col-lg-9">
                     <h3 class="my-4">{{ body }}</h3>
                     <div class="card mb-2 mt-1">
                         <div class="card-body bg-light text-dark">
-                            <h2 class="card-title p-1">Dashboard</h2>
+                            <h2 class="card-title p-1">Products</h2>
                         </div>
+                    </div>
+                    <div class="card-body bg-light text-dark">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#Id</th>
+                            <th>Product Name</th>
+                            <th>Created On</th>
+                            <th>Created By</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Toggle Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for product in data.productlist %}
+                            <tr>
+                                <th>{{ product.post_id }}</th>
+                                <td><a class="text-primary" href="item_detail.php?post_id={{ product.post_id }}&author_id={{ product.author_id }}">{{ product.title }}</a></td>
+                                <td>{{ product.date_inserted }}</td>
+                                <td>{{ product.full_name }}</td>
+                                <td>{{ product.market_category }}</td>
+                                <td>{{ product.Price }} &euro;</td>
+                                <td><i>{{ product.Status }}</i></td>
+                                <td>{% if product.Status == 'available' %}<a class="btn btn-warning btn-md mr-1 mb-2 waves-effect waves-light" href="userhome.php?section=products&action=toggleStatus&post_id={{ product.post_id }}&status={{ product.Status }}">Disable</a>{% elseif product.Status == 'pending' %}<a class="btn btn-info btn-md mr-1 mb-2 waves-effect waves-light" href="userhome.php?section=products&action=toggleStatus&post_id={{ product.post_id }}&status={{ product.Status }}">Enable</a>{% endif %}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                     </div>
                 </div>
                 {% endif %}
                 {% if data.section == 'users' and session.get('user_info').utype == 'ADMIN' %}
                     <div class="col-lg-9">
+                        <h3 class="my-4">{{ body }}</h3>
                         <div class="card mb-2 mt-1">
                             <div class="card-body bg-light text-dark">
                                 <h2 class="card-title p-1">Users</h2>

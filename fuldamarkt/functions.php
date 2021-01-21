@@ -168,6 +168,46 @@ function getAllProducts($db, $errors)
     return $query;
 }
 
+/* Gets all products with its user information */
+function getAllProductsWithUsers($db, $errors)
+{
+    try {
+        $query = $db->from("MARKET_TABLE")->leftJoin('users ON users.id = MARKET_TABLE.author_id')->select('users.full_name')->orderBy('post_id DESC');;
+    } catch (\Exception $ex) {
+        $errors[] = "Get Product By Id Error: " . $ex->getMessage();
+        return false;
+    }
+
+    return $query;
+}
+
+/* Toogles product status from pending to available and vice versa*/
+function toggleProductStatus(&$db, &$errors, $status, $post_id)
+{
+    if (!isset($status) || !isset($post_id)) {
+        return false;
+    }
+    $state = '';
+
+    if($status == 'available') {
+        $state = 'pending';
+    } else if ($status == 'pending'){
+        $state = 'available';
+    } else {
+        $state = 'pending';
+    }
+
+    try {
+        $query = $db->update('MARKET_TABLE')->set(array('Status' => $state))->where('post_id', $post_id);
+        $executed = $query->execute(true);
+    } catch (\Exception $ex) {
+        $errors[] = "Error: " . $ex->getMessage();
+        return false;
+    }
+
+    return $executed;
+}
+
 /* Table: messages */
 function sendMessage(&$db, &$errors, $message_data = array())
 {
@@ -231,6 +271,9 @@ function setUserHomeData(&$db, &$errors, &$session, &$user, &$request){
         $data['uid'] = trim($request->get('uid'));
         $data['utype'] = trim($request->get('utype'));
         $data['ustatus'] = trim($request->get('ustatus'));
+        $data['status'] = trim($request->get('status'));
+        $data['post_id'] = trim($request->get('post_id'));
+
     }
 
     $inbox_messages = getAllIncomingMessages($db, $errors, $session->get('user_info')['id']);
@@ -252,6 +295,21 @@ function setUserHomeData(&$db, &$errors, &$session, &$user, &$request){
         if (isset($data['section']) && $data['section'] == 'users'){
             $userlist = getAllUsers($db, $errors);
             $data['userlist'] = $userlist;
+        }
+
+        if (isset($data['action']) && isset($data['status']) && isset($data['post_id'])) {
+            if($data['action'] == 'toggleStatus'){
+                if(toggleProductStatus($db, $errors, $data['status'], $data['post_id'])) {
+                    $data['message'] = 'Product with post id = '.$data['post_id'].' updated Successfully!';
+                } else {
+                    $data['message'] = 'Product with post id = '.$data['post_id'].' was not updated.';
+                }
+            }
+        }
+
+        if (isset($data['section']) && ($data['section'] == 'products' or $data['section'] == '')){
+            $productList = getAllProductsWithUsers($db, $errors);
+            $data['productlist'] = $productList;
         }
     }
 

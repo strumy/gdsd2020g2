@@ -17,6 +17,9 @@ try {
 		    $message = "Userhome cannot be loaded. Please contact administrator";
 	    } else {
             $data = setUserHomeData($db, $errors, $session, $user, $request);
+            if ($data['message'] != '') {
+                $message = $data['message'];
+            }
             $title = $data['title'];
             $body = $data['body'];
 	    }
@@ -32,5 +35,4 @@ try {
     echo $template->render($template_name, $page_data);
 } catch (\Exception $ex) {
     $errors[] = "Template render error: " . $ex->getMessage();
-    var_dump($errors);
 }
