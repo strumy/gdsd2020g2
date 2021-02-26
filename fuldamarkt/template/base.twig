@@ -35,7 +35,7 @@
 
 		function getUnreadCount() {
 			$.get("unreadcount.php", function(data){
-				if(data != "0")
+				if(data != "0" || data > 0)
 					$('#unreadmessages').html("<a class='nav-link text-white' href='userhome.php?section=messages'>You have " + data + " new messages</a>");
 			});
 
