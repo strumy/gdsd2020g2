@@ -17,10 +17,10 @@
 
     {% if session.get('is_authenticated') %}
         <!-- Page Content -->
-        <div class="container">
+        <div class="container-fluid">
 
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <h2 class="my-4">{{ title }}</h2>
                     <div class="list-group">
                         <a href="userhome.php?section=products" class="list-group-item {% if data.section == null or data.section == 'products' %}active{% endif %}">Products</a>
@@ -30,32 +30,37 @@
                         <a href="userhome.php?section=messages" class="list-group-item {% if data.section == 'messages' %}active{% endif %}">Messages</a>
                     </div>
                 </div>
+                {% if (data.section == null or data.section == 'products') and session.get('user_info').utype != 'ADMIN' %}
+                <div class="col-lg-10">
+                    <h5 class="my-4">{{ body }}</h5>
+                </div>
+                {% endif %}
                 {% if (data.section == null or data.section == 'products') and session.get('user_info').utype == 'ADMIN' %}
-                <div class="col-lg-9">
-                    <h3 class="my-4">{{ body }}</h3>
+                <div class="col-lg-10">
+                    <h5 class="my-4">{{ body }}</h5>
                     <div class="card mb-2 mt-1">
                         <div class="card-body bg-light text-dark">
-                            <h2 class="card-title p-1">Products</h2>
+                            <h5 class="card-title p-1">Products</h5>
                         </div>
                     </div>
                     <div class="card-body bg-light text-dark">
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>#Id</th>
-                            <th>Product Name</th>
-                            <th>Created On</th>
-                            <th>Created By</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Status</th>
-                            <th>Toggle Status</th>
+                            <th scope="col">#Id</th>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Created On</th>
+                            <th scope="col">Created By</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Toggle Status</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for product in data.productlist %}
                             <tr>
-                                <th>{{ product.post_id }}</th>
+                                <th scope="row">{{ product.post_id }}</th>
                                 <td><a class="text-primary" href="item_detail.php?post_id={{ product.post_id }}&author_id={{ product.author_id }}">{{ product.title }}</a></td>
                                 <td>{{ product.date_inserted }}</td>
                                 <td>{{ product.full_name }}</td>
@@ -71,46 +76,44 @@
                 </div>
                 {% endif %}
                 {% if data.section == 'users' and session.get('user_info').utype == 'ADMIN' %}
-                    <div class="col-lg-9">
-                        <h3 class="my-4">{{ body }}</h3>
+                    <div class="col-lg-10">
+                        <h5 class="my-4">{{ body }}</h5>
                         <div class="card mb-2 mt-1">
                             <div class="card-body bg-light text-dark">
-                                <h2 class="card-title p-1">Users</h2>
+                                <h5 class="card-title p-1">Users</h5>
                             </div>
                         </div>
 
-                        <table>
+                        <table class="table">
                             <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Full Name</th>
-                                <th>Email</th>
-                                <th>Username</th>
-                                <th>User Type</th>
-                                <th>Gender</th>
-                                <th>User Status</th>
-                                <th>Last Login Date</th>
-                                <th>Date Inserted</th>
-                                <th>Date Updated</th>
-                                <th>Toggle Admin/Normal User</th>
-                                <th>Enable/Disable</th>
+                                <th scope="col">#</th>
+                                <th scope="col">Full Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">User Type</th>
+                                <th scope="col">Gender</th>
+                                <th scope="col">Last Login Date</th>
+                                <th scope="col">Date Inserted</th>
+                                <th scope="col">Date Updated</th>
+                                <th scope="col">User Type Change</th>
+                                <th scope="col">Enable/Disable</th>
                             </tr>
                             </thead>
                             <tbody>
                             {% for user in data.userlist %}
                             <tr>
-                                <th>{{ user.id }}</th>
+                                <th scope="row">{{ user.id }}</th>
                                 <td>{{ user.full_name }}</td>
                                 <td>{{ user.email }}</td>
                                 <td>{{ user.user_name }}</td>
                                 <td>{{ user.utype }}</td>
-                                <td>{{ user.gender }}</td>
-                                <td>{% if user.ustatus == 1 %}Enabled{% elseif user.ustatus == 0 %}Disabled{% elseif user.ustatus == 2 %}Deleted{% endif %}</td>
-                                <td>{{ user.date_lastlogin }}</td>
+                                <td>{% if user.gender == 'M' %}Male{% elseif user.gender == 'F' %}Female{% else %} Hidden {% endif %}</td>
+                                <td>{{ user.date_lastlogin}}</td>
                                 <td>{{ user.date_inserted }}</td>
                                 <td>{{ user.date_updated }}</td>
-                                <td>{% if user.utype != "ADMIN" %}<a href="userhome.php?section=users&action=makeadmintoggle&uid={{ user.id }}&utype={{ user.utype }}">Make Admin</a>{% else %}<a href="userhome.php?section=users&action=makeadmintoggle&uid={{ user.id }}&utype={{ user.utype }}">Make Normal User</a>{% endif %}</td>
-                                <td>{% if user.ustatus == 1 %}<a href="userhome.php?section=users&action=ustatus&uid={{ user.id }}&ustatus={{ user.ustatus }}">Disable</a> {% else %}<a href="userhome.php?section=users&action=ustatus&uid={{ user.id }}&ustatus={{ user.ustatus }}">Enable</a>{% endif %}</td>
+                                <td>{% if user.utype != "ADMIN" %}<a class="btn btn-danger btn-md mr-1 mb-2" href="userhome.php?section=users&action=makeadmintoggle&uid={{ user.id }}&utype={{ user.utype }}">Make Admin</a>{% else %}<a class="btn btn-success btn-md mr-1 mb-2" href="userhome.php?section=users&action=makeadmintoggle&uid={{ user.id }}&utype={{ user.utype }}">Make Normal User</a>{% endif %}</td>
+                                <td>{% if user.ustatus == 1 %}<a class="btn btn-warning btn-md mr-1 mb-2 waves-effect waves-light" href="userhome.php?section=users&action=ustatus&uid={{ user.id }}&ustatus={{ user.ustatus }}">Disable</a> {% else %}<a class="btn btn-info btn-md mr-1 mb-2 waves-effect waves-light" href="userhome.php?section=users&action=ustatus&uid={{ user.id }}&ustatus={{ user.ustatus }}">Enable</a>{% endif %}</td>
                             </tr>
                             {% endfor %}
                             </tbody>
@@ -118,33 +121,54 @@
                     </div>
                 {% endif %}
                 {% if data.section == 'messages' %}
-                <div class="col-lg-9">
-                    <h3 class="my-4">{{ body }}</h3>
+                <div class="col-lg-10">
+                    <h5 class="my-4">{{ body }}</h5>
                     <div class="card mb-2 mt-1">
                         <div class="card-body bg-light text-dark">
-                            <h2 class="card-title p-1">Inbox</h2>
+                            <h5 class="card-title p-1">Inbox</h5>
                         </div>
                     </div>
                     {% for message in data.inboxmessages %}
                     <div class="card mb-4">
                         <div class="card-body">
-                            <h2 class="card-title h5">Message from {{ message.full_name }}</h2>
-                            <p class="card-text">{{ message.body }}</p>
-                            <a href="{% if session.get('is_authenticated') %}message.php?post_id={{ message.id_product }}&author_id={{ message.id_sender }} {% else %} login.php?m=m{% endif %}" class="btn btn-primary">Reply</a>
+                        <p>                       
+                            <h5 class="card-title"><span class="text-small">{{loop.index}} |</span> <a class="text-secondary h5" data-toggle="collapse" href="#collapse{{ message.id}}" role="button" aria-expanded="false" aria-controls="collapse{{ message.id}}">Message from <strong class="text-success">{{ message.full_name }}</strong> about product </a><a class="text-primary" href="item_detail.php?post_id={{message.id_product}}&author_id={{message.author_id}}">{{ message.title }}</a></h5>
+                            <div class="collapse" id="collapse{{message.id}}">
+                                <div class="card card-body">
+                                {{ message.body }}
+                                </div>
+                             </div>
+                            <span>
+                                <a href="{% if session.get('is_authenticated') %}message.php?post_id={{ message.id_product }}&author_id={{ message.id_sender }} {% else %} login.php?m=m{% endif %}" class="btn btn-primary">Reply</a>
+                                {% if message.is_read == 0 %}
+                                    <a class="btn btn-outline-warning btn-sm" href="userhome.php?section=messages&msgid={{ message.id }}&setisread=1">Mark as Read</a>
+                                {% else %}
+                                    <a class="btn btn-outline-danger btn-sm" href="userhome.php?section=messages&msgid={{ message.id }}&setisread=0">Mark as Unread</a>
+                                {% endif %}
+                            </span>
+                            <p class="card-text float-right">{{ message.date_inserted|date("F jS Y \\a\\t g:ia") }}</p>
                         </div>
                     </div>
                     {% endfor %}
                     <div class="card mb-2 mt-1">
                         <div class="card-body bg-light text-dark">
-                            <h2 class="card-title p-1">Sent Messages</h2>
+                            <h5 class="card-title p-1">Sent Messages</h5>
                         </div>
                     </div>
                     {% for message in data.sentmessages %}
                         <div class="card mb-4">
                             <div class="card-body">
-                                <h2 class="card-title h5">Message to {{ message.full_name }}</h2>
-                                <p class="card-text">{{ message.body }}</p>
-                                <a href="{% if session.get('is_authenticated') %}message.php?post_id={{ message.id_product }}&author_id={{ message.id_receiver }} {% else %} login.php?m=m{% endif %}" class="btn btn-primary">Reply</a>
+                                <h5 class="card-title">
+                                    <span class="text-small">{{loop.index}} |</span>
+                                    <a class="text-secondary h5" data-toggle="collapse" href="#collapse{{ message.id}}" role="button" aria-expanded="false" aria-controls="collapse{{ message.id}}">Message to <strong class="text-success">{{ message.full_name }}</strong> about product</a> <a class="text-primary" href="item_detail.php?post_id={{message.id_product}}&author_id={{message.author_id}}">{{ message.title }}</a>
+                                </h5>
+	                    	 <div class="collapse" id="collapse{{message.id}}">
+                                <div class="card card-body">
+                                {{ message.body }}
+                                </div>
+                             </div>
+                                <a href="{% if session.get('is_authenticated') %}message.php?post_id={{ message.id_product }}&author_id={{ message.id_receiver }} {% else %} login.php?m=m{% endif %}" class="btn btn-primary">Send Message</a>
+				 <p class="card-text float-right">{{ message.date_inserted|date("F jS Y \\a\\t g:ia") }}</p>
                             </div>
                         </div>
                     {% endfor %}

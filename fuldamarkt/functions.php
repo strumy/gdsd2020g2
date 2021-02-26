@@ -172,7 +172,7 @@ function getAllProducts($db, $errors)
 function getAllProductsWithUsers($db, $errors)
 {
     try {
-        $query = $db->from("MARKET_TABLE")->leftJoin('users ON users.id = MARKET_TABLE.author_id')->select('users.full_name')->orderBy('post_id DESC');;
+        $query = $db->from("MARKET_TABLE")->leftJoin('users ON users.id = MARKET_TABLE.author_id')->select('users.full_name')->orderBy('post_id DESC');
     } catch (\Exception $ex) {
         $errors[] = "Get Product By Id Error: " . $ex->getMessage();
         return false;
@@ -232,8 +232,8 @@ function getAllIncomingMessages(&$db, &$errors, $user)
 {
     try {
         $query = $db->from("messages")->leftJoin('users ON users.id = messages.id_sender')->select('users.full_name')
-            ->leftJoin('MARKET_TABLE ON MARKET_TABLE.post_id = messages.id_product')->select('MARKET_TABLE.author_id')
-            ->where("id_receiver", $user['id']);
+            ->leftJoin('MARKET_TABLE ON MARKET_TABLE.post_id = messages.id_product')->select(array('MARKET_TABLE.author_id', 'MARKET_TABLE.title'))
+            ->where("id_receiver", $user['id'])->orderBy('date_inserted DESC');
 
     } catch (\Exception $ex) {
         $errors[] = "Error: " . $ex->getMessage();
@@ -247,8 +247,8 @@ function getAllOutgoingMessages(&$db, &$errors, $user)
 {
     try {
         $query = $db->from("messages")->leftJoin('users ON users.id = messages.id_receiver')->select('users.full_name')
-            ->leftJoin('MARKET_TABLE ON MARKET_TABLE.post_id = messages.id_product')->select('MARKET_TABLE.author_id')
-            ->where("id_sender", $user['id']);
+            ->leftJoin('MARKET_TABLE ON MARKET_TABLE.post_id = messages.id_product')->select(array('MARKET_TABLE.author_id', 'MARKET_TABLE.title'))
+            ->where("id_sender", $user['id'])->orderBy('date_inserted DESC');
 
     } catch (\Exception $ex) {
         $errors[] = "Error: " . $ex->getMessage();
@@ -258,6 +258,24 @@ function getAllOutgoingMessages(&$db, &$errors, $user)
     return $query;
 }
 
+function setMessageReadStatus(&$db, &$errors, $msgid, $is_read)
+{
+    if (!isset($msgid) || !isset($is_read)) {
+        return false;
+    }
+
+    try {
+        $query = $db->update('messages', array('date_updated' => new \FluentLiteral('NOW()'), 'is_read' => $is_read), $msgid);
+        $executed = $query->execute(true);
+    } catch (\Exception $ex) {
+        $errors[] = "Error: " . $ex->getMessage();
+        return false;
+    }
+
+    return $executed;
+}
+
+/* Sets Userhome Data*/
 function setUserHomeData(&$db, &$errors, &$session, &$user, &$request){
     if ($user['utype'] == 'ADMIN') {
         $title = "Admin Home";
@@ -273,7 +291,8 @@ function setUserHomeData(&$db, &$errors, &$session, &$user, &$request){
         $data['ustatus'] = trim($request->get('ustatus'));
         $data['status'] = trim($request->get('status'));
         $data['post_id'] = trim($request->get('post_id'));
-
+        $data['msgid'] = trim($request->get('msgid'));
+        $data['is_read'] = trim($request->get('setisread'));
     }
 
     $inbox_messages = getAllIncomingMessages($db, $errors, $session->get('user_info')['id']);
@@ -307,9 +326,17 @@ function setUserHomeData(&$db, &$errors, &$session, &$user, &$request){
             }
         }
 
-        if (isset($data['section']) && ($data['section'] == 'products' or $data['section'] == '')){
+        if ( ($data['section'] == 'products' or $data['section'] == null)){
             $productList = getAllProductsWithUsers($db, $errors);
             $data['productlist'] = $productList;
+        }
+    }
+
+    if ( ($data['section'] == 'messages') && $data['msgid'] != null && $data['is_read'] != null ){
+        if(!setMessageReadStatus($db, $errors, $data['msgid'], $data['is_read'])) {
+            $data['message'] = "Unread/Read status of Message (" . $data['msgid'] .") was not updated successfully. ";
+        } else {
+            $data['message'] = "Unread/Read status of Message (" . $data['msgid'] .") was updated successfully. ";
         }
     }
 

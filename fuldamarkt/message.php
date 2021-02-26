@@ -25,6 +25,7 @@ if ($request->getMethod() == "POST") {
         'id_receiver' => trim($request->get('id_receiver')),
         'id_sender' => trim($request->get('id_sender')),
         'id_product' => trim($request->get('id_product')),
+        'is_read' => 0,
         'mstatus' => 1
     );
 

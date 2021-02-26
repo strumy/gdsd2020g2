@@ -26,7 +26,26 @@
 		<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" media="screen"/>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous" type="text/javascript"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		
+		<script>
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip();
+		});
 
+		function getUnreadCount() {
+			$.get("unreadcount.php", function(data){
+				if(data != "0")
+					$('#unreadmessages').html("<a class='nav-link text-white' href='userhome.php?section=messages'>You have " + data + " new messages</a>");
+			});
+
+		}
+
+		$(document).ready(function() {
+			setInterval(getUnreadCount, 3000);
+		});
+
+		</script>
 		{% block headtags %}{% endblock %}
 	</head>
 	<body>
@@ -46,7 +65,7 @@
 							</li>
 							{% if session.get('is_authenticated') %}
 								<li class="nav-item">
-									<a class="nav-link" href="userhome.php">User's dashboard</a>
+									<a class="nav-link" href="userhome.php">User's dashboard </a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="logout.php">Logout</a>
@@ -58,11 +77,14 @@
 								<li class="nav-item">
 									<a class="nav-link" href="signup.php">Signup</a>
 								</li>
+
 							{% endif %}
 						</ul>
+						<div class="nav-item float-right" id="unreadmessages"></div>
 					</div>
 				</nav>
-                <h4 class="alert alert-info text-center">"Fulda University Software Engineering Fall 2020. For Demonstration Only</h4>
+				<div class="alert alert-info text-center">Fulda University Software Engineering Fall 2020. For Demonstration Only.</div>
+
 				{% if message %}
 					<div id="reports">{{ message }}</div>
 				{% endif %}
@@ -71,8 +93,11 @@
 						<div id="errors">{{ error }}</div>
 					{% endfor %}
 				{% endif %}
-				<div id="body"> {% block body %}{% endblock %}
-					</div>
+				{% block body %}
+				<div id="body">
+
+				</div>
+				{% endblock %}
 				</div>
 				<footer id="footer" class="bg-transparent text-black text-center text-lg-start">
 					{% block footer %}
